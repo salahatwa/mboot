@@ -59,22 +59,22 @@ Application for dynamic generating any user templates , any web intializer like 
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
-There are many great README templates available on GitHub, however, I didn't find one that really suit my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need.
+Application for dynamic generating any user templates , any web intializer like springboot web for any programming language
 
 Here's why:
-* Your time should be focused on creating something amazing. A project that solves a problem and helps others
-* You shouldn't be doing the same tasks over and over like creating a README from scratch
-* You should element DRY principles to the rest of your life :smile:
+* You can build any form with drag & drop online builder to build any user form 
+* You can build online template and using freemaker (template engine) to take vuser values from builded form and generate rendered template
+* You can write any aritcles with your design to  :smile:
+* You can 
 
-Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue.
-
-A list of commonly used resources that I find helpful are listed in the acknowledgements.
 
 ### Built With
-This section should list any major frameworks that you built your project using. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
+This application built with Angular8 for frontend and Spring boot for backend and java8  , database mysql
+* [Springboot](https://spring.io)
+* [Angular](https://angular.io/)
+* [MySql](https://www.mysql.com/)
 * [Bootstrap](https://getbootstrap.com)
 * [JQuery](https://jquery.com)
-* [Laravel](https://laravel.com)
 
 
 
@@ -186,6 +186,6 @@ Project Link: [https://github.com/your_username/repo_name](https://github.com/yo
 [license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=flat-square
 [license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/othneildrew
+[linkedin-url]: https://www.linkedin.com/in/salah-atwa/
 [product-screenshot]: images/screenshot.png
 
