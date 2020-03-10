@@ -1,8 +1,3 @@
-# Mboot
-Application for dynamic generating any user templates , any web intializer like springboot web for any programming language
-
-
-
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
@@ -22,12 +17,10 @@ Application for dynamic generating any user templates , any web intializer like 
   <h3 align="center">Mboot</h3>
 
   <p align="center">
-    Best online generator & Template rendering & blog system you can use
+    Best online generator & Template rendering & blog system you can use , build any web intializer like springboot initializer web , dynamic your code
     <br />
-    <a href="https://mboot.herokuapp.com/"><strong>Explore the docs »</strong></a>
+    <a href="https://mboot.herokuapp.com/"><strong>View Demo »</strong></a>
     <br />
-    <br />
-    <a href="https://mboot.herokuapp.com/">View Demo</a>
   </p>
 </p>
 
