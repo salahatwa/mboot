@@ -123,8 +123,8 @@ export class EditorComponent implements OnInit {
 
     // use the FormBuilder to create a form group
     this.articleForm = this.fb.group({
-      title: ['', Validators.compose([Validators.required,  Validators.pattern('^(?=.{3,100}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._ ]+(?<![_.])$')])],
-      description: ['', Validators.compose([Validators.required,  Validators.pattern('^(?=.{8,200}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._ ]+(?<![_.])$')])],
+      title: ['', Validators.compose([Validators.required,  Validators.pattern('^(?=.{3,100}$)(?![-_.])(?!.*[-_.]{2})[a-zA-Z0-9-._ ]+(?![-_.])$')])],
+      description: ['', Validators.compose([Validators.required,  Validators.pattern('^(?=.{3,100}$)(?![-_.])(?!.*[-_.]{2})[a-zA-Z0-9-._ ]+(?![-_.])$')])],
       body: ['', Validators.required],
       tagList: this.fb.array([],Validators.compose([betweenLength(0,4)])) ,
     
@@ -177,7 +177,7 @@ add(event: MatChipInputEvent): void {
     // Add our tag
     if ((value || '').trim()) {
       this.article.tagList.push( value.trim());
-      this.tagsArray.push(new FormControl(value.trim(),Validators.pattern('^(?=.{1,15}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._ ]+(?<![_.])$')));
+      this.tagsArray.push(new FormControl(value.trim(),Validators.pattern('^(?=.{1,50}$)(?![-_.])(?!.*[-_.]{2})[a-zA-Z0-9-._ ]+(?![-_.])$')));
     }
     
     // Reset the input value
