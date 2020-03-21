@@ -1,0 +1,70 @@
+<div class="container-fluid gedf-wrapper">
+
+    <div class="container page">
+        <div class="row">
+
+            <div class="col-md-4">
+                <div class="card profile">
+                    <div class="card-header profileName">
+                        {{ profile.username }}
+                        <span class="isVerified">
+                    <svg width="24" height="24" viewBox="0 0 24 24">
+            <path d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M11,16.5L18,9.5L16.59,8.09L11,13.67L7.91,10.59L6.5,12L11,16.5Z"></path>
+          </svg>
+                  </span>
+                        <div class="isOnline">
+                            <small>Online</small>
+                        </div>
+                    </div>
+                    <div class="card-body profileBody">
+                        <div class="profilePic">
+                            <div *ngIf="profile.image!= null">
+                                <img class="avatar" [src]="profile.image" />
+                            </div>
+
+                            <div *ngIf="profile.image== null">
+                                <ngx-avatar class="my-avatar" size="50" [name]="profile.username"></ngx-avatar>
+                            </div>
+
+                        </div>
+                        <div class="profileInfo">
+                            <p>{{ profile.bio }}</p>
+                        </div>
+                    </div>
+                    <div class="card-footer actions">
+                        <div *ngIf="!isUser" class="actionFirst">
+                            <app-follow-button [profile]="profile" (toggle)="onToggleFollowing($event)">
+                            </app-follow-button>
+                        </div>
+                        <div *ngIf="isUser" class="actionSecond">
+                            <a [routerLink]="['/settings']" class="btn btn-sm btn-outline-secondary action-btn">
+                                Profile
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-8">
+                <div class="articles-toggle">
+                    <ul class="nav nav-pills outline-active">
+                        <li class="nav-item">
+                            <a class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" [routerLink]="['/profile', profile.username]">
+                 My Posts
+              </a>
+                        </li>
+                        <li [hidden]="!isUser" class="nav-item">
+                            <a class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" [routerLink]="['/profile', profile.username, 'favorites']">
+                 Favorited Posts
+              </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <router-outlet></router-outlet>
+            </div>
+
+        </div>
+    </div>
+
+</div>

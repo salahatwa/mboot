@@ -1,0 +1,97 @@
+.nav-link.active {
+    color: #fff;
+    background-color: antiquewhite !important;
+}
+
+.container.page {
+    margin-top: 1.5rem
+}
+
+.profile {
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* height: 400px; */
+    position: sticky;
+    /* top: 50%;
+    left: 50%;
+    margin: -200px 0 0 -125px; */
+    border-radius: 24px;
+    border: none;
+    box-shadow: 0 37.125px 70px -12.125px rgba(0, 0, 0, 0.2);
+    transition: all .3s;
+}
+
+.profileName {
+    background: transparent;
+    border: 0;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.isVerified {
+    margin: 5px;
+}
+
+.card-body {
+    margin-top: 1.5em;
+}
+
+.avatar {
+    border-radius: 50%;
+    max-width: 128px;
+    transform: scale(0.95);
+    transition: all .5s;
+    cursor: pointer;
+}
+
+.my-avatar {
+    border-radius: 50%;
+    max-width: 128px;
+    transform: scale(0.95);
+    transition: all .5s;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.avatar:hover {
+    transform: scale(1);
+    box-shadow: 0 37.125px 70px -12.125px rgba(0, 0, 0, 0.2);
+}
+
+.profilePic {
+    text-align: center;
+}
+
+.isOnline {
+    text-align: center;
+}
+
+.profileInfo {
+    margin-top: 1em;
+    font-weight: 200;
+    font-size: 12px;
+    text-align: center;
+}
+
+.actions {
+    background: transparent;
+    border: 0;
+    display: inline-flex;
+}
+
+.actionFirst,
+.actionSecond {
+    width: 50%;
+    text-align: center;
+    transform: scale(0.8);
+    transition: all .3s;
+    cursor: pointer;
+}
+
+.actionFirst:hover,
+.actionSecond:hover {
+    transform: scale(1);
+}

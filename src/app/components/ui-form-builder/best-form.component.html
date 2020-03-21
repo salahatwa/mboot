@@ -1,0 +1,523 @@
+<!-- <mat-toolbar color="primary" class="fixed-header" >
+
+    <mat-toolbar-row> -->
+
+<div class="wysiwyg-toolbar">
+    <button class="btn btn-wysiwyg wysiwyg-change" matTooltip="Add Page" (click)="addPageStep()"><i class="fas fa-plus-circle"></i></button>
+    <button class="btn btn-wysiwyg wysiwyg-change"><span class="glyphicon glyphicon-arrow-right" ></span></button>
+    <span class="separator"></span>
+
+    <div *ngFor="let item of toolbarItems" [matTooltip]="item.label" class="btn btn-wysiwyg pointer" [dndDraggable]="item" [dndEffectAllowed]="'copy'" (dndEnd)="onDragEnd($event)">
+        <span [ngClass]="item.dragIcon"></span>
+    </div>
+</div>
+
+
+<slide-panel [activePane]="isLeftVisible ? 'left' : 'right'">
+    <div leftPane>
+        <cdk-virtual-scroll-viewport itemSize="10" class="example-viewport">
+
+            <!-- <div class="dw_body_right"> -->
+            <div class="toggleBtn">
+                <label class="switch switch-left-right">
+                    <input class="switch-input" type="checkbox" [(ngModel)]="isFormView">
+                    <span class="switch-label" data-off="view" data-on="edit"></span> <span class="switch-handle"></span> </label>
+            </div>
+            <!-- </div> -->
+
+            <ul id="formAppUl" *ngIf="isFormView && pages.content">
+
+                <!-- <app-form-view [model]="model" (result)="updateResult($event)"></app-form-view> -->
+
+                <!-- <div class="col-md-12 col-md-offset-4">
+                    <dynamic-form [fields]="model.attributes" #form="dynamicForm" (submit)="submit($event)">
+                        <div class="row" *ngFor="let rows of layout.rows">
+                            <div *ngFor="let col of rows.cols" class="{{col.colClass}}">
+                                <ng-container dynamic-form-placeId="{{col.placeId}}"></ng-container>
+                            </div>
+                        </div>
+                    </dynamic-form>
+                </div> -->
+
+                <app-view-form [model]="pages">
+
+                </app-view-form>
+                <!-- <h1> This View All form</h1> -->
+
+
+
+            </ul>
+
+            <!-- body -->
+            <ul class="formAppUl" *ngIf="!isFormView">
+                <div class="dw_body" *ngFor="let page of pages.content; let i = index; let last = last;">
+
+
+                    <div class="dw_body_left">
+
+                        <span class="dw_body_text">Page {{i + 1}} of {{pages.content?.length}}</span>
+                        <div class="dw_body_left-triangle"></div>
+                    </div>
+
+                    <div class="dw_body_right">
+                        <button mat-icon-button color="primary" matTooltip="Delete Page" (click)="deletePageStep(page)"><i class="fas fa-minus-circle"></i></button>
+                        <button *ngIf="!last" mat-icon-button color="primary" matTooltip="Move down" (click)="moveItem(i,i+1)"><i class="fas fa-caret-down"></i></button>
+                        <button *ngIf="i!=0" mat-icon-button color="primary" matTooltip="Move up" (click)="moveItem(i,i-1)"><i class="fas fa-caret-up"></i></button>
+                    </div>
+
+
+                    <div class="dw_body_content">
+
+                        <div class="form-group" style="margin-bottom: 0px !important; padding: 30px 60px 5px 60px;" [style.backgroundColor]="page?.theme?.bgColor" [style.color]="page?.theme?.textColor">
+
+                            <!-- <div id="dwSurveyTitle">
+                                <div id="dwSurveyName" class="editAble" contenteditable="true"> {{page.title}} </div>
+                            </div> -->
+
+                            <mat-form-field class="dwSurveyTitle">
+                                <mat-label>Step title</mat-label>
+                                <input matInput placeholder="Enter step title" [(ngModel)]="page.title">
+                            </mat-form-field>
+
+
+                            <mat-form-field class="dwSurveyNote">
+                                <mat-label>Step description</mat-label>
+                                <input matInput placeholder="Step description" [(ngModel)]="page.subtitle">
+                            </mat-form-field>
+
+                            <!-- <div id="dwSurveyNote">
+                                <div id="dwSurveyNoteEdit" class="editAble" contenteditable="true">{{page.subtitle}}</div>
+                            </div> -->
+
+                        </div>
+
+                        <div [style.backgroundColor]="page?.theme?.bgColor" [style.color]="page?.theme?.textColor">
+                            <section dndDropzone (dndDragover)="onDragover($event)" (dndDrop)="onDrop($event,page.attributes)" class="dndDropArea" [ngClass]="{'empty':page.attributes.length == 0}" [style.backgroundColor]="page.theme.bgColor" [style.color]="page.theme.textColor">
+
+                                <div class="field" *ngFor="let item of page.attributes;let i= index;" (dndStart)="onDragStart($event)" (dndCanceled)="onDragCanceled($event)" (dndMoved)="onDragged(item, page.attributes, 'move')" [dndEffectAllowed]="'all'" [dndDraggable]="item">
+                                    <div class="row form-group">
+                                        <div class="col-1"><i class="fa fa-ellipsis-v dndHandle" dndHandle></i></div>
+                                        <!-- <div class="col-1"><i class="fa fa-ellipsis-v"></i></div> -->
+                                        <div class="col-10">
+                                            <ng-container [ngTemplateOutlet]="itemsTemplateRef" [ngTemplateOutletContext]="{ item: item }">
+                                            </ng-container>
+                                        </div>
+
+                                        <div class="col-1">
+                                            <i (click)="item.toggle=true;isLeftVisible = !isLeftVisible;setSelectedModel(item)" class="fa fa-cog pull-left" style="cursor: pointer;"></i>
+                                            <i (click)="removeField(i,page.attributes)" class="fa fa-trash pull-right" style="cursor: pointer;"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--optional placeholder element for dropzone-->
+                                <!--will be removed from DOM on init-->
+                                <div class="dndPlaceholder" dndPlaceholderRef>
+                                </div>
+                            </section>
+
+                        </div>
+
+
+
+                        <!-- FORM VIEW -->
+
+                        <!-- <ul id="formAppUl" *ngIf="isFormView && page.content"> -->
+
+                        <!-- <app-form-view [model]="model" (result)="updateResult($event)"></app-form-view> -->
+
+                        <!-- <div class="col-md-12 col-md-offset-4">
+                            <dynamic-form [fields]="model.attributes" #form="dynamicForm" (submit)="submit($event)">
+                                <div class="row" *ngFor="let rows of layout.rows">
+                                    <div *ngFor="let col of rows.cols" class="{{col.colClass}}">
+                                        <ng-container dynamic-form-placeId="{{col.placeId}}"></ng-container>
+                                    </div>
+                                </div>
+                            </dynamic-form>
+                        </div> -->
+
+                        <!-- <app-view-form [model]="page.content">
+
+                        </app-view-form> -->
+
+
+
+                        <!-- </ul> -->
+                        <!-- end view form -->
+
+                    </div>
+
+
+
+                    <table cellspacing="0" class="mw-page-bottom-tab-container">
+                        <tbody>
+                            <tr>
+                                <!-- <td class="mw-page-bottom-tab-triangle"></td> -->
+                                <td class="mw-form-page-bottom-tab">
+                                    <div class="page-flow-select form-inline">
+                                        <label>After page 1:</label>
+                                        <select class="form-control" id="page-flow-select-1">
+                                        <option label="Continue to next page" value="object:222">Continue to next page</option>
+                                        <option label="Go to page 1" value="object:1253">Go to page 1</option>
+                                        <option label="Go to page 2" value="object:1254">Go to page 2</option>
+                                        <option label="Go to page 3" value="object:1255">Go to page 3</option>
+                                        <option label="Submit form" value="object:1256">Submit form</option>
+                                    </select>
+                                    </div>
+                                </td>
+                                <td class="mw-page-bottom-tab-actions">
+                                    <button type="button" class="btn ng-scope" title="Add page"><i class="fa fa-plus"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </ul>
+            <!-- END OF BODY -->
+        </cdk-virtual-scroll-viewport>
+    </div>
+
+    <div rightPane>
+        <cdk-virtual-scroll-viewport itemSize="10" class="example-viewport">
+            <!-- Field Properties-->
+            <ng-container [ngTemplateOutlet]="toggleTemplateRef" [ngTemplateOutletContext]="{ item: selectedModel }">
+            </ng-container>
+        </cdk-virtual-scroll-viewport>
+    </div>
+</slide-panel>
+
+
+
+
+
+
+<ng-template #itemsTemplateRef let-item="item">
+
+    <div *ngIf="item.type=='object' || item.type=='list' ">
+        <section dndDropzone (dndDragover)="onDragover($event)" (dndDrop)="onDrop($event,item.subFields)" class="dndDropArea" [ngClass]="{'empty':item.subFields.length == 0}">
+
+            <div class="field" *ngFor="let subItem of item.subFields;let i= index;" (dndStart)="onDragStart($event)" (dndCanceled)="onDragCanceled($event)" (dndMoved)="onDragged(subItem, item.subFields, 'move')" [dndEffectAllowed]="'all'" [dndDraggable]="subItem">
+                <div class="row form-group">
+                    <div class="col-1"><i class="fa fa-ellipsis-v dndHandle" dndHandle></i></div>
+                    <!-- <div class="col-1"><i class="fa fa-ellipsis-v"></i></div> -->
+                    <div class="col-10">
+                        <ng-container [ngTemplateOutlet]="itemsTemplateRef" [ngTemplateOutletContext]="{ item: subItem }">
+                        </ng-container>
+                    </div>
+
+                    <div class="col-1">
+                        <i (click)="subItem.toggle=true;isLeftVisible = !isLeftVisible;setSelectedModel(subItem)" class="fa fa-cog pull-left" style="cursor: pointer;"></i>
+                        <i (click)="removeField(i,item.subFields)" class="fa fa-trash pull-right" style="cursor: pointer;"></i>
+                    </div>
+                </div>
+            </div>
+            <!--optional placeholder element for dropzone-->
+            <!--will be removed from DOM on init-->
+            <div class="dndPlaceholder" dndPlaceholderRef>
+            </div>
+        </section>
+    </div>
+
+
+
+
+    <div *ngIf="item.type=='input'">
+        <mat-form-field class="full-width-field">
+            <input matInput id="{{item.name}}" [placeholder]="item.label" [type]="item.inputType" [(ngModel)]="item.value">
+        </mat-form-field>
+    </div>
+
+    <div *ngIf="item.type=='date'">
+        <mat-form-field class="full-width-field">
+            <input matInput [matDatepicker]="picker" [placeholder]="item.label" [(ngModel)]="item.value">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+    </div>
+
+    <!-- <div *ngIf="item.type=='paragraph'">
+        <p class="form-text">{{item.placeholder}}</p>
+    </div> -->
+    <div *ngIf="item.type=='select'">
+        <mat-select [placeholder]="item.label" [(ngModel)]="item.value">
+            <!-- <mat-option></mat-option> -->
+            <mat-option *ngFor="let v of item.options" [value]="v.value">
+                {{v.label}}
+            </mat-option>
+        </mat-select>
+    </div>
+
+
+    <div *ngIf="item.type=='image'">
+
+        <div class="form-group">
+
+            <div class="input-group">
+                <span class="input-group-btn">
+                    <span class="btn btn-default btn-file" >
+                    {{item.label}} <input type="file" mat-raised-button color="primary" class="imgInp" accept="image/*" disabled>
+                    </span>
+                </span>
+                <input type="text" class="form-control" readonly>
+            </div>
+
+        </div>
+    </div>
+
+    <div *ngIf="item.type=='checkbox'">
+        <label>{{item.label}}</label>
+        <mat-selection-list [ngClass]="{'list-horizontal':item.layout === 'H'}" [(ngModel)]="item.value">
+            <mat-list-option [checkboxPosition]="after" *ngFor="let v of item.options" [value]="v.value">
+                {{v.label}}
+            </mat-list-option>
+        </mat-selection-list>
+    </div>
+    <div *ngIf="item.type=='radio'">
+        <label>{{item.label}}</label>
+        <mat-radio-group [ngClass]="{'dir-radio-group':item.layout === 'V'}" [(ngModel)]="item.value">
+            <mat-radio-button *ngFor="let v of item.options" [value]="v.value">{{v.label}}</mat-radio-button>
+        </mat-radio-group>
+    </div>
+    <div *ngIf="item.type=='button'" class="btn-cont">
+        <button type="{{item.subtype}}" mat-raised-button color="primary" (click)="submit()">{{item.label}}</button>
+    </div>
+
+    <div *ngIf="item.type=='toggle'">
+        <mat-checkbox [checked]="item.value" [(ngModel)]="item.value">{{item.label}}</mat-checkbox>
+    </div>
+
+</ng-template>
+
+
+
+<ng-template #toggleTemplateRef let-item="item">
+
+    <i (click)="isLeftVisible = !isLeftVisible;" class="fa fa-reply" style="cursor: pointer;padding-left:10px;"></i>
+
+    <div *ngIf="item?.toggle" class="toggle-Wrapper">
+
+        <mat-tab-group>
+            <mat-tab label="Basic">
+                <mat-form-field class="full-width-field">
+                    <input matInput placeholder="Label" [type]="text" [(ngModel)]="item.label">
+                </mat-form-field>
+
+                <div *ngIf="item.inputType">
+                    <mat-select placeholder="Select Input Type" [(ngModel)]="item.inputType" required>
+                        <!-- <mat-option></mat-option> -->
+                        <mat-option *ngFor="let option of inputTypes" [value]="option">
+                            {{ option }}
+                        </mat-option>
+                    </mat-select>
+                </div>
+
+
+
+                <mat-form-field class="full-width-field">
+                    <input matInput placeholder="Name" [type]="text" [(ngModel)]="item.name">
+                </mat-form-field>
+
+
+                <mat-form-field class="full-width-field">
+                    <input matInput placeholder="Placeholder" [type]="text" [(ngModel)]="item.placeholder">
+                </mat-form-field>
+
+
+                <!-- radio || checkbox || autocomplete -->
+                <div *ngIf="item.type=='radio'|| item.type=='checkbox' || item.type=='select'">
+                    <div class="row">
+                        <div class="col-5">
+                            <div class="form-group">
+                                <label>Label</label>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="form-group">
+                                <label>Value</label>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="form-group">
+                                <label>Action</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngFor="let i of item.options; let valueIndex=index;" class="row">
+                        <div class="col-5">
+
+                            <mat-form-field class="full-width-field">
+                                <input matInput placeholder="Option Label" [type]="text" [(ngModel)]="i.label">
+                            </mat-form-field>
+
+                        </div>
+                        <div class="col-5">
+
+                            <mat-form-field class="full-width-field">
+                                <input matInput placeholder="Option Value" [type]="text" [(ngModel)]="i.value">
+                            </mat-form-field>
+
+                        </div>
+                        <div class="col-2">
+                            <div class="form-group">
+                                <label (click)="item.options.splice(valueIndex,1)"><i class="far fa-trash-alt"></i></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-5">
+
+                            <mat-form-field class="full-width-field">
+                                <input matInput placeholder="Option Label" [type]="text" [(ngModel)]="optionValue.label">
+                            </mat-form-field>
+
+                        </div>
+                        <div class="col-5">
+                            <mat-form-field class="full-width-field">
+                                <input matInput placeholder="Option Value" [type]="text" [(ngModel)]="optionValue.value">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-2">
+                            <div class="form-group">
+                                <label (click)="addValue(item.options)"><i class="fas fa-plus-square"></i></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </mat-tab>
+
+            <mat-tab label="Validations">
+
+                <div class="form-group">
+                    <label>Validations</label>
+                    <div class="row">
+                        <div class="col-3">
+                            <div class="form-group">
+                                <label>Type</label>
+                            </div>
+                        </div>
+
+                        <div class="col-3">
+                            <div class="form-group">
+                                <label>Pattern</label>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label>Message</label>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="form-group">
+                                <label>Action</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngFor="let i of item.validations; let valueIndex=index;" class="row">
+                        <div class="col-3">
+                            <div>
+                                <!-- <mat-form-field class="full-width-field form-control">
+                                    <input matInput placeholder="Option Label" [type]="text" [(ngModel)]="i.label">
+                                </mat-form-field> -->
+                                <mat-select placeholder="Select Input Type" [(ngModel)]="i.name">
+                                    <!-- <mat-option></mat-option> -->
+                                    <mat-option *ngFor="let option of validationTypes" [value]="option">
+                                        {{ option }}
+                                    </mat-option>
+                                </mat-select>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div *ngIf="i.name == 'pattern'">
+                                <mat-form-field class="full-width-field">
+                                    <input matInput placeholder="Pattern" [type]="text" [(ngModel)]="i.pattern">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <mat-form-field class="full-width-field">
+                                <input matInput placeholder="Error Message" [type]="text" [(ngModel)]="i.message">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-2">
+                            <div class="form-group">
+                                <label (click)="item.validations.splice(valueIndex,1)"><i class="far fa-trash-alt"></i></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3">
+                            <mat-select placeholder="Select Validation Type" [(ngModel)]="validatorOptions.name">
+                                <!-- <mat-option></mat-option> -->
+                                <mat-option *ngFor="let option of validationTypes" [value]="option">
+                                    {{ option }}
+                                </mat-option>
+                            </mat-select>
+                        </div>
+                        <div class="col-3">
+                            <div *ngIf="validatorOptions.name == 'pattern'">
+                                <mat-form-field class="full-width-field">
+                                    <input matInput placeholder="Pattern" [type]="text" [(ngModel)]="validatorOptions.pattern">
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="col-4">
+                            <mat-form-field class="full-width-field">
+                                <input matInput placeholder="Validation Error Message" [type]="text" [(ngModel)]="validatorOptions.message">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-2">
+                            <div class="form-group">
+                                <label (click)="addValidations(item.validations)"><i class="fas fa-plus-square"></i></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </mat-tab>
+            <mat-tab label="Actions">
+                <div *ngIf="item.type=='button'" class="row">
+                    <div class="col-6">
+                        <div>
+                            <mat-select placeholder="Select Sumbit App" [(ngModel)]="item.action.appId">
+                                <!-- <mat-option></mat-option> -->
+                                <mat-option *ngFor="let app of appsTemplate" [value]="app.id">
+                                    {{ app.name }}
+                                </mat-option>
+                            </mat-select>
+                        </div>
+                        <div *ngIf="item.action.appId">
+                            <mat-select placeholder="Select Action" [(ngModel)]="item.action.actionType" (selectionChange)="loadTemplate($event.value,item.action.appId)">
+                                <!-- <mat-option></mat-option> -->
+                                <mat-option *ngFor="let action of actions" [value]="action.value">
+                                    {{ action.name }}
+                                </mat-option>
+                            </mat-select>
+                        </div>
+
+                        <div *ngIf="item.action.appId&&item.action.actionType&&item.action.actionType=='1'">
+                            <mat-select placeholder="Select Template" [(ngModel)]="item.action.noteId">
+                                <!-- <mat-option></mat-option> -->
+                                <mat-option *ngFor="let appNote of appNotes" [value]="appNote.id">
+                                    {{ appNote.title }}
+                                </mat-option>
+                            </mat-select>
+                        </div>
+
+                    </div>
+
+                </div>
+            </mat-tab>
+        </mat-tab-group>
+
+
+
+
+
+
+
+    </div>
+</ng-template>

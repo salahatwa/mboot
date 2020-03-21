@@ -1,0 +1,101 @@
+<div class="container-fluid gedf-wrapper">
+
+
+    <div class="banner" *appShowAuthed="false">
+        <div class="container">
+            <h1 class="logo-font">Intialize</h1>
+            <p>A place to make dynamic <i>Building</i> for any appliactions.</p>
+        </div>
+    </div>
+
+    <div class="container page ">
+        <div class="row">
+
+            <div class="col-md-2">
+                <!-- <div class="feed-toggle"> -->
+                <ul class="user-menu">
+                    <li *appShowAuthed="true" class="user-menu-item">
+                        <a [ngClass]="{'active': listConfig.type === 'feed'}" (click)="setListTo('feed')">
+               Your Feed
+              
+            </a>
+                    </li>
+                    <li class="user-menu-item">
+                        <a [ngClass]="{'active': listConfig.type === 'all' && !listConfig.filters.tag}" (click)="setListTo('all')">
+               Global Feed
+             
+            </a>
+
+                        <!-- <ng-adsense></ng-adsense> -->
+                    </li>
+                    <li [hidden]="!listConfig.filters.tag" class="user-menu-item">
+                        <a [ngClass]="{'active': listConfig.filters.tag}">
+                            <i class="ion-pound"></i> {{ listConfig.filters.tag }}
+                        </a>
+                    </li>
+                </ul>
+                <!-- </div> -->
+            </div>
+
+            <div class="col-md-7">
+                <app-article-list [limit]="10" [config]="listConfig"></app-article-list>
+            </div>
+
+            <div class="col-md-3">
+                <div class="sidebar">
+
+                    <div class="tag-list" *ngIf="page.totalElements>0">
+
+
+                        <mat-card>
+                            <mat-card-header>
+                                <div mat-card-avatar>
+                                    <i class="fas fa-tag"></i>
+                                </div>
+                                <mat-card-subtitle>Popular Tags</mat-card-subtitle>
+                            </mat-card-header>
+
+                            <ng-mat-autocomplete [(ngModel)]="tagSearch" [placeholder]="'Search'" [displayTemplate]="itemTemplate" [hasProgressBar]="true" [hasSearchButton]="true" [source]="tagSearchService" [minChars]="1"> </ng-mat-autocomplete>
+
+                            <ng-template #itemTemplate let-item>
+                                <div style="flex: 1 1 auto;">
+                                    <i class="fas fa-tag"></i> {{item.name}}
+                                </div>
+                            </ng-template>
+
+                            <button *ngIf="tagSearch" mat-raised-button (click)="setListTo('all', {tag: tagSearch.name})"> Get articles </button>
+
+                            <p> </p>
+                            <mat-chip-list>
+                                <mat-chip *ngFor="let tag of page.content" (click)="setListTo('all', {tag: tag.name})"> {{ tag.name }}</mat-chip>
+                            </mat-chip-list>
+
+                            <div *ngIf="page.totalElements > 0">
+                                <a class="btn btn-outline" [ngClass]="{'disabled': page.first }" [routerLink]="" (click)="getPreviousPage()">
+                                    <i class="fas fa-angle-double-left"></i>
+                                </a>
+                                <a class="btn btn-outline" [ngClass]="{'disabled': page.last }" [routerLink]="" (click)="getNextPage()">
+                                    <i class="fas fa-angle-double-right"></i>
+                                </a>
+                            </div>
+
+                        </mat-card>
+
+
+
+                    </div>
+
+                    <div [hidden]="tagsLoaded">
+                        Loading tags...
+                    </div>
+
+                    <div [hidden]="!tagsLoaded || page.totalElements > 0">
+                        No tags are here... yet.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,22 @@
+<!-- <infinite-scroll (scrolled)="onScroll()" style="height: 100%; overflow-y: auto"></infinite-scroll> -->
+
+<div *ngIf="results.length>0">
+    <infinite-scroll (scrolled)="onScroll()" style="height: 100%; overflow-y: hidden">
+        <app-article-preview *ngFor="let article of results" [article]="article">
+        </app-article-preview>
+    </infinite-scroll>
+</div>
+
+
+<div class="app-article-preview" [hidden]="!loading">
+    <div class="linear-background">
+        <div class="inter-draw"></div>
+        <div class="inter-crop"></div>
+        <div class="inter-right--top"></div>
+        <div class="inter-right--bottom"></div>
+    </div>
+</div>
+
+<div *ngIf="results.length==0" class="col-md-7" [hidden]="loading">
+    No articles are here... yet.
+</div>

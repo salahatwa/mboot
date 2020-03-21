@@ -1,0 +1,25 @@
+<dialog-header [titleText]=data.title></dialog-header>
+<mat-dialog-content>
+    <!-- {{ data.dialogText }} -->
+
+    <mat-form-field>
+        <mat-select placeholder="Application Templates" [formControl]="formApps" multiple>
+            <mat-select-trigger>
+                <!-- {{formApps.value ? formApps.value[1] : ''}} -->
+                <span *ngIf="formApps.value?.length > 1" class="example-additional-selection">
+              (+{{formApps.value.length - 1}} {{formApps.value?.length === 2 ? 'other' : 'others'}}) selected
+            </span>
+                <span *ngIf="formApps.value?.length == 1" class="example-additional-selection">
+                (only {{formApps.value.length }} ) selected
+              </span>
+            </mat-select-trigger>
+            <mat-option *ngFor="let apps of appsTemplate" [value]="apps.id">{{apps.name}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button [disabled]="!formApps.value?.length" mat-raised-button [mat-dialog-close]="true">{{ 'Buttons.Ok' | translate }}</button>
+    <button mat-raised-button color="primary" [mat-dialog-close]="false">{{ 'Buttons.Cancel' | translate }}</button>
+</mat-dialog-actions>

@@ -1,0 +1,93 @@
+.page-link {
+    cursor: pointer;
+}
+
+.article-preview {
+    border-top: 1px solid rgba(0, 0, 0, .1);
+    padding: 1.5rem 0
+}
+
+.preview-link {
+    color: inherit!important
+}
+
+.preview-link:hover {
+    text-decoration: inherit!important
+}
+
+.preview-link p {
+    font-weight: 300;
+    font-size: 24px;
+    color: #999;
+    margin-bottom: 15px;
+    font-size: 1rem;
+    line-height: 1.3rem
+}
+
+.search-results {
+    height: 100vm;
+    overflow: scroll;
+}
+
+
+/**
+** lOADING ARTICLES
+*/
+
+@keyframes placeHolderShimmer {
+    0% {
+        background-position: -468px 0
+    }
+    100% {
+        background-position: 468px 0
+    }
+}
+
+.linear-background {
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-name: placeHolderShimmer;
+    animation-timing-function: linear;
+    background: #f6f7f8;
+    background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
+    background-size: 1000px 104px;
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+}
+
+.inter-draw {
+    background: #FFF;
+    width: 100%;
+    height: 100px;
+    position: absolute;
+    top: 100px;
+}
+
+.inter-right--top {
+    background: #FFF;
+    width: 100%;
+    height: 20px;
+    position: absolute;
+    top: 20px;
+    left: 100px;
+}
+
+.inter-right--bottom {
+    background: #FFF;
+    width: 100%;
+    height: 50px;
+    position: absolute;
+    top: 60px;
+    left: 100px;
+}
+
+.inter-crop {
+    background: #FFF;
+    width: 20px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 100px;
+}

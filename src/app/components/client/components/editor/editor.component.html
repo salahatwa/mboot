@@ -1,0 +1,94 @@
+<div class="container-fluid gedf-wrapper">
+    <div class="container page">
+        <div class="row">
+            <div class="col-md-12">
+
+                <app-list-errors [errors]="errors"></app-list-errors>
+
+                <form [formGroup]="articleForm" (ngSubmit)="submitForm()">
+
+                    <mat-card style="margin-bottom: 12px;">
+                        <mat-card-header>
+
+                            <mat-card-title>Create Article</mat-card-title>
+
+                        </mat-card-header>
+
+                        <mat-card-content>
+
+                            <mat-form-field class="example-chip-list">
+                                <input matInput formControlName="title" placeholder="Article Title" type="text">
+
+
+                                <ng-container class="invalid-feedback" ngProjectAs="mat-error">
+                                    <mat-error *ngIf="f.title.hasError('required')">Article Title is required</mat-error>
+                                    <mat-error *ngIf="f.title.hasError('pattern')">Invalid Article Title</mat-error>
+                                </ng-container>
+                            </mat-form-field>
+
+
+
+                            <mat-form-field class="example-chip-list">
+                                <input matInput formControlName="description" placeholder="What's this article about?" type="text">
+                                <ng-container class="invalid-feedback" ngProjectAs="mat-error">
+                                    <mat-error *ngIf="f.description.hasError('required')">About article is required</mat-error>
+                                    <mat-error *ngIf="f.description.hasError('pattern')">Invalid Article description</mat-error>
+                                </ng-container>
+                            </mat-form-field>
+
+
+
+
+
+                            <mat-form-field class="example-chip-list" [ngClass]="{disabledDiv: disbaledTagUpdate}">
+                                <mat-chip-list formArrayName="tagList" #chipList aria-label="Tag selection">
+
+
+                                    <mat-chip *ngFor="let tag of article.tagList;let i=index" [selectable]="true" [removable]="true" (removed)="remove(tag)">
+                                        {{tag}}
+                                        <i *ngIf="true&&article.tagList.length>0&&!disbaledTagUpdate" class="fas fa-times-circle" matChipRemove></i>
+                                    </mat-chip>
+                                    <input [disabled]="disbaledTagUpdate" placeholder="Tags..." [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="true" (matChipInputTokenEnd)="add($event)">
+
+                                    <ng-container class="invalid-feedback" ngProjectAs="mat-error">
+                                        <!-- <div *ngFor="let e of f.tagList.controls">
+                                            <mat-error *ngIf="e.hasError('pattern')">Ivalid Tag {{e.value}}</mat-error>
+                                        </div> -->
+                                        <mat-error *ngIf="f.tagList.hasError('betweenLength')">You exceed Maximum Tags</mat-error>
+                                    </ng-container>
+                                </mat-chip-list>
+
+
+                            </mat-form-field>
+
+
+
+                            <div class="editor-box">
+                                <jodit-editor formControlName="body" [(config)]="editorConfig"></jodit-editor>
+
+                                <ng-container class="invalid-feedback" ngProjectAs="mat-error">
+                                    <mat-error *ngIf="f.body.hasError('required')">Article Body is required</mat-error>
+                                </ng-container>
+                            </div>
+
+                        </mat-card-content>
+                        <hr/>
+                        <mat-card-actions>
+                            <button mat-raised-button type="button" [disabled]="isSubmitting||!articleForm.valid" type="submit">
+                                Publish Article
+                            </button>
+
+                        </mat-card-actions>
+                    </mat-card>
+
+
+                </form>
+
+            </div>
+
+            <div class="col-md-12">
+
+            </div>
+        </div>
+    </div>
+</div>

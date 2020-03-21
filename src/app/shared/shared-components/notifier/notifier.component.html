@@ -1,0 +1,24 @@
+<div *ngIf="src">
+  <ng-container *ngFor="let notification of src.notifications.reverse()" >
+    <div [@notify]="'show'"> 
+      <div>
+        <button (click)="src.destroy(notification)">
+          <app-close-x-icon></app-close-x-icon>
+        </button>
+        <ng-container [ngSwitch]="notification.type">
+          <ng-container *ngSwitchCase="1">
+            <span class="level" [ngClass]="{'accept-type': notification.type == 1}">
+              <app-accept-icon></app-accept-icon>
+            </span>
+          </ng-container>
+          <ng-container *ngSwitchCase="2">
+            <span class="level" [ngClass]="{'fail-type': notification.type == 2}">
+              <app-fail-icon></app-fail-icon>
+            </span>
+          </ng-container>
+        </ng-container>
+        <span>{{notification.message}}</span>
+      </div>
+    </div>
+  </ng-container>
+</div>

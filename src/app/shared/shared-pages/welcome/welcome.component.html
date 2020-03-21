@@ -1,0 +1,26 @@
+<div class="window-frame">
+    <div class="window-frame-titlebar">
+        <div class="window-frame-titlebar-dragarea">
+        </div>
+    </div>
+    <div class="window-frame-content">
+        <div class="welcome">
+            <div class="welcome-content">
+                <div class="welcome-content-foreground">
+                    <logo-full [textColor]="'white'"></logo-full>
+                    <div class="welcome-content-foreground-title mt-4">{{ 'WelcomePage.Title' | translate }}</div>
+                    <div class="welcome-content-foreground-text mt-4">{{ 'WelcomePage.Text' | translate }}</div>
+                    <div class="mt-4">
+                        <button mat-raised-button color="primary" (click)="openDirectoryChooserAsync()" *ngIf="!isBusy">
+                            {{ 'WelcomePage.SelectButton' | translate }}
+                        </button>
+                        <mat-spinner *ngIf="isBusy" [diameter]="40"></mat-spinner>
+                    </div>
+                </div>
+                <div class="welcome-content-background">
+                    <i class="loading-content-background-pen fas fa-boxes"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

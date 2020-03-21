@@ -1,0 +1,19 @@
+@import "css/variables.scss";
+.page {
+    margin-top: 1.5rem
+}
+
+.contact-item {
+    display: flex;
+    flex-direction: row;
+}
+
+.contact-item-icon-solid {
+    font-family: "Segoe UI", sans-serif;
+    font-size: 24px;
+}
+
+.contact-item-icon-brands {
+    font-family: "Segoe UI", sans-serif;
+    font-size: 24px;
+}

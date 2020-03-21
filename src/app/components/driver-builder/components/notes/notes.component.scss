@@ -1,0 +1,111 @@
+@import "./../../../../../css/variables.scss";
+@import "./../../../../../css/theming.scss";
+.content {
+    padding: 1em;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.notes {
+    // position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.note-header-item {
+    height: 48px;
+    display: flex;
+    flex-direction: row;
+    width: calc(100vw - 351px); // HACK: cdk-virtual-scroll-viewport doesn't enforce a width to its components
+    cursor: default !important;
+}
+
+.note-item {
+    height: 48px;
+    display: flex;
+    flex-direction: row;
+    // width: calc(100vw - 351px); // HACK: cdk-virtual-scroll-viewport doesn't enforce a width to its components
+    cursor: default !important;
+}
+
+.note-item:hover {
+    background: $color-hover;
+}
+
+.note-item-icon {
+    @extend .background-color-primary;
+    margin: 4px;
+    width: 40px;
+    min-width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.note-item-icon-pen {
+    width: 20px;
+    height: 20px;
+}
+
+.note-item-actions {
+    // margin: 0 75px 0 0;
+    padding-right: 5px;
+    width: 20px;
+    min-width: 20px;
+    height: 48px;
+    line-height: 48px;
+    font-size: 20px;
+    font-family: material;
+    cursor: pointer;
+}
+
+.note-item-actions-heart-marked {
+    @extend .color-primary;
+}
+
+.note-item-actions-heart-unmarked {
+    color: $color-grey;
+}
+
+.note-item-info {
+    height: 48px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.note-item-info-title {
+    margin-top: 4px;
+    height: 20px;
+    font-size: $fontsize-normal !important;
+    display: flex;
+    align-items: center;
+}
+
+.note-item-info-title>span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.note-item-info-date-and-tasks {
+    margin-bottom: 4px;
+    height: 20px;
+    font-size: $fontsize-normal !important;
+    color: $color-grey;
+    display: flex;
+    align-items: center;
+}
+
+.note-item-info-date-and-tasks>span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

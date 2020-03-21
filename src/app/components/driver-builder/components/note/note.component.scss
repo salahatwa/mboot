@@ -1,0 +1,114 @@
+@import "./../../../../../css/variables.scss";
+@import "./../../../../../css/theming.scss";
+.note-content {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.note-content-floating {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 56px;
+    height: 56px;
+    z-index: 1;
+}
+
+.note-content-floating-button {
+    margin-bottom: 8px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+.note-content-floating-button-icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.note-content-floating-button-icon {
+    color: white;
+    font-family: material;
+    font-size: 24px;
+}
+
+.note-content-floating-button-icon-action {
+    color: $color-grey-icon;
+    font-family: material;
+    font-size: 20px;
+}
+
+.note-content-floating-button-icon-action-pdf {
+    color: $color-grey-icon;
+    font-family: "Segoe UI", sans-serif;
+    font-size: 18px;
+}
+
+.note-content-floating-button-icon-action-export {
+    color: $color-grey-icon;
+    font-family: "Segoe UI", sans-serif;
+    font-size: 16px;
+    margin-left: 4px;
+}
+
+.note-content-fixed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 0;
+}
+
+.note-content-fixed-title {
+    background-color: $color-darkgrey;
+    width: 100%;
+    height: 50px;
+}
+
+.note-content-fixed-title-text {
+    background-color: $color-lightgrey;
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    font-size: 24px;
+    padding: 0 8px 0 8px;
+    color: $color-darkgrey;
+}
+
+.note-editor {
+    flex: 1;
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.ql-toolbar.ql-snow {
+    padding-right: 50px !important;
+}
+
+.ql-editor ul[data-checked="true"] li {
+    text-decoration: line-through;
+    opacity: 0.5;
+}
+
+.ql-editor ul[data-checked="false"]>li::before {
+    font-family: "Segoe UI", sans-serif;
+    content: "\f0c8";
+}
+
+.ql-editor ul[data-checked="true"] li::before {
+    font-family: "Segoe UI", sans-serif;
+    content: "\f14a";
+}
+
+.notebook-changer {
+    // display: flex;
+    flex-direction: row;
+    -webkit-app-region: no-drag;
+    color: $color-darkgrey;
+    cursor: pointer;
+    float: left;
+}

@@ -1,0 +1,33 @@
+@import "css/variables.scss";
+@import "css/theming.scss";
+.logo {
+    display: flex;
+    user-select: none;
+}
+
+.logo-image {
+    width: 64px;
+}
+
+.logo-text {
+    flex-grow: 1;
+    margin: auto 0px auto 20px;
+    font-family: "Segoe UI", "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: 48px;
+}
+
+.logo-icon {
+    @extend .background-color-primary;
+    width: 64px;
+    min-width: 64px;
+    height: 64px;
+    border-radius: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-icon-pen {
+    width: 32px;
+    height: 32px;
+}

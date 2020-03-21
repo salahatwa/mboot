@@ -1,0 +1,19 @@
+<dialog-header [titleText]=data.titleText></dialog-header>
+<mat-dialog-content>
+    <mat-form-field>
+        <input matInput [(ngModel)]="inputText" placeholder="{{ data.placeholderText }}" (keyup.enter)="closeDialog()">
+    </mat-form-field>
+
+    <br/>
+
+    <mat-radio-group required [(ngModel)]="appType" aria-label="Select an option" #radioGroup="matRadioGroup">
+        <mat-radio-button value="0">Application Template</mat-radio-button>
+        <mat-radio-button value="1">Application Form</mat-radio-button>
+    </mat-radio-group>
+
+
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button [disabled]="!inputText||!appType" mat-raised-button color="primary" [mat-dialog-close]="true">{{ 'Buttons.Ok' | translate }}</button>
+    <button mat-raised-button [mat-dialog-close]="false">{{ 'Buttons.Cancel' | translate }}</button>
+</mat-dialog-actions>

@@ -1,0 +1,82 @@
+<!-- <div class="container"> -->
+<!-- put your content here-->
+<div class="container-fluid gedf-wrapper">
+    <mat-pages title="{{this.selectedCollection?.name}}" (pageChanged)="pnPageChanges($event)">
+
+        <mat-page-loader>
+            <mat-page-outlook title="App List">
+
+                <button mat-icon-button (click)="addApplicationAsync()" matTooltip="{{ 'Tooltips.AddNotebook' | translate }}">
+                    <i class="icon fas fa-plus-circle">{{notebooksCount}}</i>
+                        <span class="h7 text-muted">- {{ 'MainPage.Notebooks' | translate }}</span>
+                    </button>
+
+                <cdk-virtual-scroll-viewport itemSize="applications.length">
+                    <mat-grid-list [responsive]="false" rowHeight="50" gutterSize="6px">
+                        <mat-grid-tile *cdkVirtualFor="let application of applications">
+                            <a class="grid-list-item mat-body mat-elevation-z2" [class.selected-item]="application.isSelected" mat-ripple>
+                                <div *ngIf="application.appType=='1'" class="icon fab fa-nutritionix"></div>
+                                <div *ngIf="application.appType=='0'" class="icon fab fa-creative-commons-share"></div>
+                                <span class="flex-remain" (click)="setSelectedApplication(application)" style="cursor:pointer">{{application.name}}</span>
+                                <button mat-icon-button [matMenuTriggerFor]="menu" (click)="$event.preventDefault()">
+                                    <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                                <mat-menu #menu="matMenu" xPosition="before" overlapTrigger="false">
+                                    <button mat-menu-item (click)="renameApplication(application)" matTooltip="{{ 'Tooltips.RenameNotebook' | translate }}">
+                                    <i class="icon far fa-edit"></i>
+                                    <span>{{ 'Tooltips.RenameNotebook' | translate }}</span>
+                                </button>
+                                    <button mat-menu-item (click)="deleteApplication(application)" matTooltip="{{ 'Tooltips.DeleteNotebooks' | translate }}">
+                                    <i class="icon far fa-trash-alt"></i>
+                                    <span>{{ 'Tooltips.DeleteNotebooks' | translate }}</span>
+                                </button>
+                                    <button mat-menu-item (click)="zipApplication(application)" matTooltip="Download Zip">
+                                    <i class="icon fas fa-file-archive"></i>
+                                    <span>Archive</span>
+                                </button>
+                                </mat-menu>
+                            </a>
+                        </mat-grid-tile>
+                    </mat-grid-list>
+                </cdk-virtual-scroll-viewport>
+
+            </mat-page-outlook>
+
+            <mat-page-content>
+
+                <!-- Selected notebook and search -->
+                <div *ngIf="noteButtonsVisibility!='hidden'">
+                    <active-app-search class="active-app-and-search" [activeApplication]="activeApplication" [(notesCount)]="notesCount" [(activeNote)]="activeNote" (clickGetCurrent)="clickOnCurrentSelected($event)">
+                    </active-app-search>
+                </div>
+
+                <!-- Note buttons -->
+                <div *ngIf="noteButtonsVisibility!='hidden'">
+                    <div *ngIf="activeApplication?.appType=='0'||activeApplication?.appType=='1'" class="note-buttons m-2" [@noteButtonsVisibility]="noteButtonsVisibility">
+                        <button class="list-button" mat-mini-fab color="" (click)="importNotesAsync()" matTooltip="{{ 'Tooltips.ImportNotes' | translate }}">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            </button>
+                        <button class="list-button" mat-mini-fab color="" (click)="addNoteAsync($event,'1')" matTooltip="Add Folder">
+                                <i class="note-item-icon-pen fas fa-folder-plus"></i>
+                            </button>
+                        <button class="list-button" mat-fab (click)="addNoteAsync($event,'0')" matTooltip="{{ 'Tooltips.AddNote' | translate }}">
+                                <i class="note-item-icon-pen fas fa-file-medical" style="color:whitesmoke"></i>
+                            </button>
+                    </div>
+
+                    <div *ngIf="activeApplication?.appType=='1'" class="note-buttons m-2" [@noteButtonsVisibility]="noteButtonsVisibility">
+                        <button class="list-button" mat-fab (click)="addNoteAsync($event,'3')" matTooltip="{{ 'Tooltips.AddNote' | translate }}">
+                                <i class="fas fa-newspaper" style="color:whitesmoke"></i>
+                            </button>
+                    </div>
+                </div>
+
+
+                <notes-component [activeApplication]="activeApplication" [events]="eventsSubject.asObservable()" [(activeSelectedNote)]="activeNote" (notesCount)="onNotesCountChanged($event)" (activeNote)="onSelectedNote($event)"></notes-component>
+
+            </mat-page-content>
+        </mat-page-loader>
+
+    </mat-pages>
+
+</div>

@@ -1,0 +1,210 @@
+<!-- <div class="window-frame-titlebar">
+    <div class="window-frame-titlebar-dragarea pl-1">
+        {{ applicationName }}
+    </div>
+    <main-menu-button></main-menu-button>
+</div> -->
+<!-- <mat-toolbar color="primary">
+    <div fxHide.gt-xs>
+        <button mat-icon-button (click)="onToggleSidenav()">
+                <mat-icon>menu</mat-icon>
+            </button>
+    </div>
+    <div>
+        <a routerLink="/home"> {{ applicationName }}</a>
+    </div>
+    <div fxFlex fxLayout fxLayoutAlign="end" fxHide.xs>
+     
+        <ul fxLayout fxLayoutGap="15px" class="navigation-items" *appShowAuthed="false">
+
+            <li>
+                <a class="nav-link" routerLink="/login" routerLinkActive="active">
+                  Sign in
+                </a>
+            </li>
+
+            <li>
+                <a class="nav-link" routerLink="/register" routerLinkActive="active">
+                  Sign up
+                </a>
+            </li>
+
+        </ul>
+
+        <ul fxLayout fxLayoutGap="5px" class="navigation-items" *appShowAuthed="true">
+            <li>
+                <a class="nav-link" [routerLink]="['/profile', currentUser.profile?.username]" routerLinkActive="active">
+                    <img [src]="currentUser.profile?.profile?.image" *ngIf="currentUser.profile?.profile?.image" class="user-pic" /> {{ currentUser.profile?.profile?.name }}
+                </a>
+            </li>
+            <li>
+                <a class="nav-link" routerLink="/account" routerLinkActive="active">Account Actions</a>
+            </li>
+            <li class="nav-link" mat-icon-button [matMenuTriggerFor]="settingMenu">
+                <i class="fa fa-cogs" aria-hidden="true" style="color:#DDDDDD; cursor: pointer;"></i>
+            </li>
+        </ul>
+
+    </div>
+</mat-toolbar>
+-->
+
+<mat-menu #settingMenu="matMenu">
+    <mat-divider></mat-divider>
+    <button class="menu-button" routerLink="/settings" mat-menu-item>
+            <span class="menu-icon"><i class="fas fa-cog"></i></span>
+            {{ currentUser.profile?.username }}
+        </button>
+
+    <button class="menu-button" [routerLink]="['/collections']" mat-menu-item>
+            <span class="menu-icon"><i class="fab fa-creative-commons-sampling-plus"></i></span>
+            Collections
+    </button>
+
+    <button class="menu-button" [routerLink]="['/request-view']" mat-menu-item>
+        <span class="menu-icon"><i class="fab fa-creative-commons-sampling-plus"></i></span>
+        Requests
+    </button>
+
+
+
+    <button class="menu-button" routerLink="/information" mat-menu-item>
+            <span class="menu-icon"><i class="far fa-user-circle"></i></span>
+           About
+    </button>
+
+    <button class="menu-button" (click)="logout()" mat-menu-item>
+            <span class="menu-icon"><i class="fas fa-sign-out-alt"></i></span>
+           Logout
+        </button>
+</mat-menu>
+
+
+<!-- <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark ">
+    <div class="container">
+        <a class="navbar-brand" routerLink="/">{{ applicationName }}</a>
+
+        <ul *appShowAuthed="false" class="nav navbar-nav pull-xs-right">
+
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/">
+                Home
+              </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/login" routerLinkActive="active">
+                Sign in
+              </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/register" routerLinkActive="active">
+                Sign up
+              </a>
+            </li>
+
+        </ul>
+
+        <ul *appShowAuthed="true" class="nav navbar-nav pull-xs-right">
+
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                Home
+              </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/editor" routerLinkActive="active">
+                    <i class="far fa-paper-plane"></i>
+                </a>
+            </li>
+
+
+
+            <li class="nav-item">
+                <a *ngIf="currentUser.profile&&currentUser.profile?.image" class="nav-link" [routerLink]="['/profile', currentUser.profile?.username]" routerLinkActive="active">
+                    <img [src]="currentUser.profile?.image" *ngIf="currentUser.profile?.image" class="user-pic" /> {{ currentUser.profile?.name }}
+                </a>
+                <a *ngIf="currentUser.profile&&!currentUser.profile?.image" class="nav-link" [routerLink]="['/profile', currentUser.profile?.username]" routerLinkActive="active">
+                    <i class="far fa-user-circle"></i> {{ currentUser.profile?.name }}
+                </a>
+
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" routerLinkActive="active" mat-icon-button [matMenuTriggerFor]="settingMenu">
+                    <i class="fas fa-user-circle" style="color:whitesmoke; cursor: pointer;"></i>
+                </a>
+            </li>
+
+        </ul>
+
+    </div>
+</nav> -->
+
+
+<!-- 
+12 - Navbar left right text and icons
+-->
+<nav class="navbar navbar-dark navbar-expand justify-content-between sticky-top bg-dark">
+    <div class="container-fluid">
+        <ul class="navbar-nav">
+            <a class="navbar-brand" routerLink="/">
+                <span class="fa fa-map"></span><span class="d-none d-sm-inline d-xl-block px-1">{{ applicationName }}</span>
+            </a>
+        </ul>
+
+        <ul *appShowAuthed="false" class="nav navbar-nav">
+
+            <!-- <li class="nav-item text-center">
+                <a class="nav-link" routerLink="/">
+                Home
+              </a>
+            </li> -->
+
+            <li class="nav-item text-center">
+                <a class="nav-link" routerLink="/login" routerLinkActive="active">
+                Sign in
+              </a>
+            </li>
+
+            <li class="nav-item text-center">
+                <a class="nav-link" routerLink="/register" routerLinkActive="active">
+                Sign up
+              </a>
+            </li>
+
+        </ul>
+
+        <ul *appShowAuthed="true" class="nav navbar-nav">
+            <li class="nav-item text-center">
+                <a class="nav-link" routerLink="/editor" routerLinkActive="active">
+                    <i class="far fa-paper-plane user-pic"></i>
+                </a>
+            </li>
+
+            <li class="nav-item text-center" id="signup-btn">
+                <!-- <a href="#" class="nav-link" data-toggle="modal" data-target="#"><span class="fa fa-user"></span><span class="d-none d-sm-inline d-xl-block px-1">Sign Up</span></a> -->
+
+                <a *ngIf="currentUser.profile&&currentUser.profile?.image" class="nav-link" [routerLink]="['/profile', currentUser.profile?.username]" routerLinkActive="active">
+                    <img [src]="currentUser.profile?.image" *ngIf="currentUser.profile?.image" class="user-pic" />
+                </a>
+                <a *ngIf="currentUser.profile&&!currentUser.profile?.image" class="nav-link" [routerLink]="['/profile', currentUser.profile?.username]" routerLinkActive="active">
+                    <!-- <i class="far fa-user-circle"></i>  -->
+                    <!-- 
+                    <span class="fa fa-user fa-2x user-pic"></span><span class="d-none d-sm-inline d-xl-block px-1">{{ currentUser.profile?.name }}</span> -->
+                    <ngx-avatar size="30" [name]="currentUser.profile?.username"></ngx-avatar>
+                </a>
+
+
+            </li>
+            <li class="nav-item text-center" id="login-btn">
+                <a class="nav-link" routerLinkActive="active" mat-icon-button [matMenuTriggerFor]="settingMenu">
+                    <i class="fas fa-cogs user-pic" style="color:whitesmoke; cursor: pointer;"></i>
+                </a>
+                <!-- <a href="#" class="nav-link" data-toggle="modal" data-target="#"><span class="fa fa-sign-in"></span><span class="d-none d-sm-inline d-xl-block px-1">Log In</span></a> -->
+            </li>
+        </ul>
+    </div>
+</nav>

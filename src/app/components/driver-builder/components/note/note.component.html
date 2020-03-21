@@ -1,0 +1,95 @@
+<div class="window-frame-content notes">
+    <!--
+    <div class="window-frame-overlay" *ngIf="isBusy">
+        <mat-spinner class="mt-4" [diameter]="100"></mat-spinner>
+    </div>
+    -->
+
+    <div class="note-content">
+        <div *ngIf="note.noteType=='0'" class="note-content-floating">
+            <button class="note-content-floating-button" mat-fab (click)="toggleShowActions()" matTooltip="{{ 'Tooltips.Actions' | translate }}">
+                    <div class="note-content-floating-button-icon-container" [@actionIconRotation]="actionIconRotation">
+                        <span *ngIf="!canPerformActions" class="note-content-floating-button-icon"><i class="fas fa-times" style="color:whitesmoke"></i></span>
+                        <span *ngIf="canPerformActions" class="note-content-floating-button-icon"><i class="fas fa-times" style="color:whitesmoke"></i></span>
+                    </div>
+                </button>
+            <button *ngIf="canPerformActions && !this.note.isTextEditor" class="note-content-floating-button" mat-mini-fab color="" (click)="setEditorMode(this.note.isTextEditor)" matTooltip="{{ 'Tooltips.UnmarkNote' | translate }}">
+                  
+                <i class="fas fa-text-height"></i>
+                
+                </button>
+            <button *ngIf="canPerformActions && this.note.isTextEditor" class="note-content-floating-button" mat-mini-fab color="" (click)="setEditorMode(this.note.isTextEditor)" matTooltip="{{ 'Tooltips.MarkNote' | translate }}">
+                        <i class="fab fa-html5"></i>
+                </button>
+            <button *ngIf="canPerformActions" class="note-content-floating-button" mat-mini-fab color="" (click)="exportNoteAsync()" matTooltip="{{ 'Tooltips.ExportNote' | translate }}">
+                    <span class="note-content-floating-button-icon-action-export">&#xF56E;</span>
+                </button>
+            <button *ngIf="canPerformActions" class="note-content-floating-button" mat-mini-fab color="" (click)="exportNoteToPdfAsync()" matTooltip="{{ 'Tooltips.ExportNoteToPdf' | translate }}">
+                    <span class="note-content-floating-button-icon-action-pdf"><i class="far fa-file-pdf"></i></span>
+                </button>
+            <button *ngIf="canPerformActions" class="note-content-floating-button" mat-mini-fab color="" (click)="printNote()" matTooltip="{{ 'Tooltips.PrintNote' | translate }}">
+                    <span class="note-content-floating-button-icon-action"><i class="far fa-save"></i></span>
+                </button>
+            <button *ngIf="canPerformActions" class="note-content-floating-button" mat-mini-fab color="" (click)="deleteNoteAsync()" matTooltip="{{ 'Tooltips.DeleteNote' | translate }}">
+                    <span class="note-content-floating-button-icon-action">&#xE872;</span>
+                </button>
+        </div>
+
+
+        <div *ngIf="note.noteType=='3'" class="note-content-floating">
+            <button class="note-content-floating-button" mat-fab (click)="toggleShowActions()" matTooltip="{{ 'Tooltips.Actions' | translate }}">
+                        <div class="note-content-floating-button-icon-container" [@actionIconRotation]="actionIconRotation">
+                            <span *ngIf="!canPerformActions" class="note-content-floating-button-icon"><i class="fas fa-times" style="color:whitesmoke"></i></span>
+                            <span *ngIf="canPerformActions" class="note-content-floating-button-icon"><i class="fas fa-times" style="color:whitesmoke"></i></span>
+                        </div>
+                    </button>
+
+            <button *ngIf="canPerformActions" class="note-content-floating-button" mat-mini-fab color="" (click)="setFormFillTemplate()" matTooltip="{{ 'Tooltips.MarkNote' | translate }}">
+                            <i class="fab fa-html5"></i>
+            </button>
+
+            <button *ngIf="canPerformActions" class="note-content-floating-button" mat-mini-fab color="" (click)="exportNoteAsync()" matTooltip="{{ 'Tooltips.ExportNote' | translate }}">
+                        <span class="note-content-floating-button-icon-action-export">&#xF56E;</span>
+                    </button>
+            <button *ngIf="canPerformActions" class="note-content-floating-button" mat-mini-fab color="" (click)="exportNoteToPdfAsync()" matTooltip="{{ 'Tooltips.ExportNoteToPdf' | translate }}">
+                        <span class="note-content-floating-button-icon-action-pdf"><i class="far fa-file-pdf"></i></span>
+                    </button>
+            <button *ngIf="canPerformActions" class="note-content-floating-button" mat-mini-fab color="" (click)="printNote()" matTooltip="{{ 'Tooltips.PrintNote' | translate }}">
+                        <span class="note-content-floating-button-icon-action"><i class="far fa-save"></i></span>
+                    </button>
+            <button *ngIf="canPerformActions" class="note-content-floating-button" mat-mini-fab color="" (click)="deleteNoteAsync()" matTooltip="{{ 'Tooltips.DeleteNote' | translate }}">
+                        <span class="note-content-floating-button-icon-action">&#xE872;</span>
+                    </button>
+        </div>
+
+        <div class="note-content-fixed" (click)="onFixedContentClick()">
+            <div class="window-frame-titlebar window-frame-titlebar-dragarea">
+                <div class="notebook-changer no-select ml-1" (click)="back()">
+                    <i class="fas fa-chevron-circle-left"></i> {{ 'Tooltips.Back' | translate }}
+                </div>
+
+            </div>
+
+            <div class="note-content-fixed-title">
+                <input class="note-content-fixed-title-text" type="text" [(ngModel)]="note.title" />
+            </div>
+            <!--
+                <div class="note-editor" [ngStyle]="editorStyle" id="editor" (keydown.control.s)=strikeThrough($event)>
+                </div>
+                -->
+            <!-- <angular-editor id="editor1" [(ngModel)]="htmlContent1" [config]="config" (ngModelChange)="onChange($event)" (blur)="onBlur($event)"></angular-editor> -->
+            <div *ngIf="note.noteType=='0'">
+                <!-- <h1>asdghasidhasiudyhasiydyhyiasdh</h1> -->
+                <jodit-editor (onChange)="onChange($event)" [(ngModel)]="note.content" [(templateModel)]="templateModel" [(config)]="editorConfig"></jodit-editor>
+            </div>
+            <!-- <cdk-virtual-scroll-viewport itemSize="48"> -->
+            <div *ngIf="note.noteType=='3'">
+                <!-- <app-form-builder name="test" (onChange)="onChange($event)" [(ngModel)]="note.content"></app-form-builder> -->
+                <!-- <app-form-builder (onChange)="onChange($event)" [appsTemplate]="appsTemplate" [(ngModel)]="note.content"></app-form-builder> -->
+                <app-best-form [appsTemplate]="appsTemplate" [(ngModel)]="modelForm"></app-best-form>
+            </div>
+            <!-- </cdk-virtual-scroll-viewport> -->
+        </div>
+        <!-- </div> -->
+        <!-- </div>
+</div> -->

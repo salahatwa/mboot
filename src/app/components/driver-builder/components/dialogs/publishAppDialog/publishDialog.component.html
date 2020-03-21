@@ -1,0 +1,33 @@
+<form [formGroup]="form" (ngSubmit)="submit(form)">
+    <h1 mat-dialog-title>
+        {{data.dialogTitle}} {{ data.note.title }}</h1>
+    <mat-dialog-content>
+        <!-- <app-list-errors [errors]="errors"></app-list-errors> -->
+        <mat-form-field class="example-chip-list">
+            <input matInput formControlName="title" placeholder="Article Title">
+        </mat-form-field>
+        <mat-form-field class="example-chip-list">
+            <input matInput formControlName="description" placeholder="Article about">
+        </mat-form-field>
+
+        <mat-form-field class="example-chip-list">
+            <mat-chip-list formArrayName="tagList" #chipList aria-label="Tag selection">
+
+
+                <mat-chip *ngFor="let tag of article.tagList;let i=index" [selectable]="true" [removable]="true" (removed)="remove(tag)">
+                    {{tag}}
+                    <!-- <mat-icon matChipRemove *ngIf="true">cancel</mat-icon>
+                fas fa-times-circle -->
+                    <i *ngIf="true" class="fas fa-times-circle" matChipRemove></i>
+                </mat-chip>
+                <input placeholder="Tags..." [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="true" (matChipInputTokenEnd)="add($event)">
+
+            </mat-chip-list>
+        </mat-form-field>
+
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button mat-raised-button type="submit">Publish</button>
+        <button mat-raised-button color="primary" [mat-dialog-close]="false">Cancel</button>
+    </mat-dialog-actions>
+</form>

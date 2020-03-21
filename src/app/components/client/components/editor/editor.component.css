@@ -1,0 +1,25 @@
+.container.page {
+    margin-top: 1.5rem
+}
+
+.example-chip-list {
+    width: 100%;
+}
+
+.editor-box {
+    box-sizing: border-box;
+    border: .5px solid #aaaaaa;
+    padding-block-start: 20px;
+    padding-block-end: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.mat-error {
+    color: red!important;
+}
+
+.disabledDiv {
+    pointer-events: none;
+    opacity: 0.4;
+}

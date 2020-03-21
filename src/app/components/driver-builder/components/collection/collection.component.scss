@@ -1,0 +1,211 @@
+@import "./../../../../../css/variables.scss";
+@import "./../../../../../css/theming.scss";
+.mat-toolbar {
+    // border-radius: 3px !important;
+    z-index: 100 !important;
+    position: relative !important;
+    background-color: #272e36 !important;
+}
+
+.mat-drawer {
+    width: 21%!important;
+    overflow-y: unset !important;
+}
+
+@media (max-width:700px) {
+    .mat-drawer {
+        width: 50%!important;
+    }
+}
+
+.mat-drawer-inner-container {
+    width: 100%;
+    height: 100%;
+    // background-color: $color-lightgrey;
+    // overflow: unset!important;
+    -webkit-overflow-scrolling: touch;
+}
+
+
+/**
+ * applications menu
+*/
+
+a.selected-item {
+    background-color: #CFD8DC;
+    color: white;
+}
+
+
+/**
+* End of applications menus
+*/
+
+.card {
+    // border-radius: 10px;
+    background-color: #fff!important;
+}
+
+.example-viewport {
+    height: calc(100vh - 35vh);
+    width: 100%;
+}
+
+cdk-virtual-scroll-viewport {
+    height: calc(100vh - 35vh);
+    width: 91%;
+    &::-webkit-scrollbar {
+        width: 0.3em;
+    }
+    &::-webkit-scrollbar-thumb {
+        @extend .background-color-primary;
+        // background-color: rgb(238, 169, 79);
+    }
+}
+
+.cdk-virtual-scroll-content-wrapper {
+    right: auto !important;
+    contain: none !important;
+}
+
+.gedf-wrapper {
+    margin-top: 0.97rem;
+}
+
+@media (min-width: 992px) {
+    .gedf-main {
+        padding-left: 4rem;
+        padding-right: 4rem;
+    }
+    .gedf-card {
+        margin-bottom: 2.77rem;
+    }
+}
+
+//-----------
+.collection {
+    width: 100%;
+    height: 100%;
+}
+
+.collection-application {
+    display: flex;
+    flex-direction: column;
+}
+
+.collection-application-title {
+    display: flex;
+}
+
+.collection-application-list {
+    flex: 1;
+    position: relative;
+    margin-top: -2px;
+}
+
+.collection-application-list-buttons {
+    display: flex;
+    flex-direction: column;
+    position: absolute !important;
+    right: 0px !important;
+    bottom: 0px !important;
+    z-index: 2;
+}
+
+.collection-application-list-list {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+}
+
+.count-label {
+    @extend .background-color-primary;
+    margin: 0 0 10px 10px;
+    min-width: 22px;
+    height: 22px;
+    border-radius: 11px;
+    padding-left: 5px;
+    padding-right: 5px;
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    -moz-opacity: 0.8;
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+.list-button {
+    margin-top: 8px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+.icon {
+    position: relative;
+    margin-right: 10px;
+    fill: #fff;
+}
+
+.add-item-icon {
+    font-family: material;
+    font-size: 28px;
+    color: #fff;
+}
+
+.edit-item-icon {
+    font-family: material;
+    font-size: 20px;
+    color: $color-grey-icon;
+}
+
+.edit-item-icon-import {
+    font-family: "Segoe UI", sans-serif;
+    font-size: 16px;
+    margin-right: 2px;
+    color: $color-grey-icon;
+}
+
+.notebook {
+    font-size: $fontsize-normal !important;
+    cursor: default !important;
+    height: 40px;
+}
+
+.notebook:hover {
+    background: $color-hover;
+}
+
+.notebook-name {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+    height: 40px;
+    line-height: 40px;
+}
+
+.drop-notebook {
+    @extend .drop-background-color-primary;
+}
+
+.active-app-and-search {
+    position: inherit;
+    top: 48px;
+    left: 351px;
+    // background-color: #fff;
+    // width: calc(100% - 351px);
+    // border-right: 1px solid $color-lightgrey;
+}
+
+.note-buttons {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    z-index: 2;
+}

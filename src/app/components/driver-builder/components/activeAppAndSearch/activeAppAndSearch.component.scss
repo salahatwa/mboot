@@ -1,0 +1,31 @@
+@import "./../../../../../css/variables.scss";
+.notes-content-title-and-search {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: $color-lightgrey;
+    border-radius: 20px;
+}
+
+.notes-content-title {
+    display: flex;
+}
+
+.notes-content-title-text {
+    white-space: nowrap;
+    overflow: hidden;
+    color: $color-darkgrey;
+}
+
+.notes-content-search {
+    margin-top: -8px;
+    width: 200px;
+    color: #ffffff;
+}
+
+.notes-content-search-clearbutton {
+    font-family: material;
+    font-size: 18px;
+    color: #ffffff;
+    cursor: pointer;
+}

@@ -1,0 +1,73 @@
+<div class="container-fluid gedf-wrapper">
+    <mat-tab-group>
+        <mat-tab label="{{ 'SettingsTabs.Appearance' | translate }}">
+            <!-- Theme -->
+            <div class="m-3">
+                <h1>{{ 'SettingsPage.Theme' | translate }}</h1>
+                <div class="theme-switcher">
+                    <div *ngFor="let theme of themes">
+                        <div class="theme-switcher-button mr-1 mb-1">
+                            <div class="theme-switcher-button-selector" *ngIf="theme.name === selectedTheme">
+                                &#xF00C;
+                            </div>
+                            <div class="theme-switcher-button-color" [ngStyle]="{'background-color': theme.color}" matTooltip="{{ theme.displayName }}" (click)="setTheme(theme.name)">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <!-- Language -->
+            <div class="m-3">
+                <h1 class="mt-2">{{ 'SettingsPage.Language' | translate }}</h1>
+                <mat-form-field>
+                    <mat-select [(ngModel)]="selectedLanguage">
+                        <mat-option *ngFor="let language of languages" [value]="language">
+                            {{ language.name }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </mat-tab>
+        <mat-tab label="{{ 'SettingsTabs.Notes' | translate }}">
+            <!--Font size -->
+            <div class="m-3">
+                <h1>{{ 'SettingsPage.FontSize' | translate }}</h1>
+                <p>{{ 'SettingsPage.FontSizeInNotes' | translate }}:
+                    <mat-form-field class="font-size-selector mx-1">
+                        <mat-select [(ngModel)]="selectedFontSize">
+                            <mat-option *ngFor="let fontSize of fontSizes" [value]="fontSize">
+                                {{ fontSize }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    {{ 'SettingsPage.PixelsShort' | translate }}
+                </p>
+            </div>
+            <hr>
+            <!-- Closing -->
+            <div class="m-3">
+                <h1 class="mt-2">{{ 'SettingsPage.Closing' | translate }}</h1>
+                <mat-slide-toggle class="mt-2" [(ngModel)]="closeNotesWithEscapeChecked">
+                    {{ 'SettingsPage.CloseNotesWithEscape' | translate }}</mat-slide-toggle>
+            </div>
+            <hr>
+            <!-- Dates -->
+            <div class="m-3">
+                <h1 class="mt-2">{{ 'SettingsPage.Dates' | translate }}</h1>
+                <mat-slide-toggle class="mt-2" [(ngModel)]="showExactDatesInTheNotesListChecked">
+                    {{ 'SettingsPage.ShowExactDatesInTheNotesList' | translate }}</mat-slide-toggle>
+            </div>
+        </mat-tab>
+        <mat-tab label="{{ 'SettingsTabs.Advanced' | translate }}">
+            <!-- Import -->
+            <div class="m-3">
+                <h1>{{ 'SettingsPage.Import' | translate }}</h1>
+                <p>{{ 'SettingsPage.ImportFromOldVersion' | translate }}</p>
+                <button mat-raised-button color="primary" (click)="import()">
+                        {{ 'Buttons.Import' | translate }}
+                    </button>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+</div>

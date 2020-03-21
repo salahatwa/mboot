@@ -1,0 +1,169 @@
+@import 'css/theming.scss';
+@import 'css/variables.scss';
+@import 'css/loader.scss';
+@import 'css/spacing.scss';
+@import 'css/elements.scss';
+.mat-drawer-container {
+    overflow: unset!important;
+}
+
+.grid-list-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background: #fff;
+    text-decoration: none;
+    padding: 4px;
+    width: calc(100% - 10px);
+    &,
+    &:hover {
+        color: $color-grey;
+    }
+    mat-icon:first-child {
+        text-align: center;
+        width: 40px;
+    }
+}
+
+.flex-remain {
+    flex: 1 1 auto;
+}
+
+.no-select {
+    user-select: none;
+}
+
+.selected-item {
+    background-color: $color-selected;
+}
+
+.mat-simple-snackbar-action {
+    @extend .color-primary;
+}
+
+
+/**
+* Angular material  
+**/
+
+.mat-dialog-actions {
+    padding: 12px 0 24px 0 !important; // Fixes bottom padding too small for dialog buttons
+}
+
+.mat-input-element {
+    font-size: $fontsize-normal !important;
+    line-height: $fontsize-normal !important;
+}
+
+.mat-form-field {
+    font-size: $fontsize-normal !important;
+    line-height: $fontsize-normal !important;
+}
+
+.mat-raised-button[color="primary"] {
+    color: white !important;
+}
+
+.mat-tooltip {
+    font-size: 14px !important;
+    @extend .background-color-primary;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.mat-tab-group {
+    background-color: $color-darkgrey;
+    height: 100%;
+}
+
+.mat-tab-body {
+    min-height: 650px !important;
+    // height: 600px !important;
+    display: block!important;
+}
+
+.mat-tab-body-content {
+    overflow: hidden!important;
+}
+
+.mat-tab-body-wrapper {
+    color: #000;
+    background-color: #fff !important;
+    height: 100%;
+    border-style: solid;
+    border-width: 0 1px 1px 1px;
+    border-color: $color-lightgrey;
+    display: flex!important;
+}
+
+.mat-tab-label {
+    color: #fff !important;
+    opacity: 1 !important;
+    user-select: none; // Prevents accidental selection of the header text
+}
+
+.mat-tab-group.mat-primary .mat-ink-bar,
+.mat-tab-nav-bar.mat-primary .mat-ink-bar {
+    height: 3px;
+}
+
+.mat-tab-header {
+    border-bottom-style: none !important;
+}
+
+.mat-tab-header-pagination-chevron {
+    border-color: #fff !important;
+}
+
+
+/**
+* End Angular material  
+**/
+
+.window-frame {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.window-frame-titlebar {
+    width: 100%;
+    height: $titlebar-height;
+    background-color: $color-lightgrey;
+    display: flex;
+    flex-direction: row;
+}
+
+.window-frame-titlebar-dragarea {
+    width: 100%;
+    height: $titlebar-height;
+    line-height: $titlebar-height;
+    flex: 1;
+    -webkit-app-region: drag;
+    color: white;
+}
+
+.window-frame-overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, .2);
+    z-index: 99;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.window-frame-content {
+    position: absolute;
+    top: $titlebar-height;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}

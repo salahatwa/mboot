@@ -1,0 +1,20 @@
+<div class="notes-content-title-and-search p-2 no-select">
+    <div class="notes-content-title">
+        <h6 class="notes-content-title-text">{{ activeApplication?.name }}</h6>
+
+        <div class="count-label">
+            <i class="fas fa-info">
+              <span class="badge">{{notesCount}}</span>
+            </i>
+        </div>
+
+
+
+        <div *ngIf="activeNote" class="count-label pointer" (click)="getCurrentSelected()">
+            <i class="fa fa-home"></i> {{activeNote?.title}}</div>
+    </div>
+    <mat-form-field class="notes-content-search">
+        <input matInput type="text" placeholder="{{ 'MainPage.Search' | translate }}" [(ngModel)]="searchService.searchText">
+        <span class="notes-content-search-clearbutton" *ngIf="searchService.searchText" matSuffix (click)="searchService.searchText=''" matTooltip="{{ 'MainPage.ClearSearch' | translate }}">&#xE5C9;</span>
+    </mat-form-field>
+</div>

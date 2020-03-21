@@ -1,0 +1,55 @@
+<div class="container-fluid gedf-wrapper page">
+
+    <!-- <div *ngIf="!showList">
+        <router-outlet></router-outlet>
+    </div> -->
+
+    <div class="card">
+        <div class="card-header d-flex pr-no">
+            <h4 class="card-title mb-no">Collections</h4>
+            <div class="card-actions ml-auto py-no">
+                <button mat-raised-button (click)="addCollectionAsync()">
+                        <span class="menu-icon material-icons" style="cursor: pointer;" matTooltip="Add Collection"><i class="fas fa-plus-circle"></i></span>
+                </button>
+            </div>
+        </div>
+
+
+        <mat-grid-list [responsive]="false" rowHeight="60" gutterSize="6px">
+
+
+
+            <mat-grid-tile *ngIf="page.totalElements==0">
+                <div class="text-inside-grid">No Data Found</div>
+            </mat-grid-tile>
+
+            <mat-grid-tile *ngFor="let collection of page.content">
+                <a class="grid-list-item mat-body mat-elevation-z2" mat-ripple>
+                    <!-- <i *ngIf="collection.name" class="icon far fa-file"></i> -->
+                    <span class="flex-remain" style="cursor: pointer;" routerLink="/collections/{{collection.name}}"> {{collection.name}}</span>
+                    <button mat-icon-button [matMenuTriggerFor]="menu" (click)="$event.preventDefault()">
+                        <i class="fas fa-ellipsis-v"></i>
+                    </button>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item (click)="renameCollection(collection)" matTooltip="{{ 'Tooltips.Rename' | translate }}">
+                            <i class="far fa-edit" ></i>
+                            {{ 'Tooltips.Rename' | translate }}
+                        </button>
+                        <button mat-menu-item (click)="deleteCollection(collection)" matTooltip="{{ 'Tooltips.Delete' | translate }}">
+                            <i class="far fa-trash-alt"></i>
+                            {{ 'Tooltips.Delete' | translate }}
+                        </button>
+                    </mat-menu>
+                </a>
+            </mat-grid-tile>
+
+
+        </mat-grid-list>
+        <hr class="w-100">
+        <app-custom-pagination [page]="page" (nextPageEvent)="getNextPage()" (previousPageEvent)="getPreviousPage()" (pageSizeEvent)="getPageInNewSize($event)">
+        </app-custom-pagination>
+    </div>
+
+
+
+</div>

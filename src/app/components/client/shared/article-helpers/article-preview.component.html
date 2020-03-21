@@ -1,0 +1,88 @@
+<div class="article-preview">
+    <!-- <app-article-meta [article]="article">
+        <app-favorite-button [article]="article" (toggle)="onToggleFavorite($event)" class="pull-xs-right">
+            {{article.favoritesCount}}
+        </app-favorite-button>
+    </app-article-meta>
+
+    <a [routerLink]="['/article', article.slug]" class="preview-link">
+        <h1>{{ article.title }}</h1>
+        <p>{{ article.description }}</p>
+        <span>Read more...</span>
+        <ul class="tag-list">
+            <li class="tag-default tag-pill tag-outline" *ngFor="let tag of article.tagList">
+                {{ tag }}
+            </li>
+        </ul>
+    </a> -->
+
+
+
+
+    <mat-card style="margin-bottom: 12px;">
+        <mat-card-header>
+            <div mat-card-avatar>
+                <a [routerLink]="['/profile', article.author.username]">
+                    <div *ngIf="article.author.image!= null">
+                        <ngx-avatar size="40" [src]="article.author.image"></ngx-avatar>
+                    </div>
+
+                    <div *ngIf="article.author.image== null">
+                        <ngx-avatar size="40" [name]="article.author.username"></ngx-avatar>
+                    </div>
+
+                </a>
+            </div>
+            <mat-card-title>{{ article.title }}</mat-card-title>
+            <mat-card-subtitle>
+                <a class="author" [routerLink]="['/profile', article.author.username]">
+          {{ article.author.username }}
+          </a>
+            </mat-card-subtitle>
+            <mat-card-subtitle> {{ article.createdAt | date: 'longDate' }}</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+            <p>
+                {{ article.description }}
+            </p>
+            <a [routerLink]="['/article', article.slug]" class="preview-link">
+                <span>Read more...</span>
+            </a>
+        </mat-card-content>
+        <mat-card-actions>
+            <button style="border: none;outline:none;display:block;margin-right:5px;" mat-icon-button [disabled]="isSubmitting" (click)="toggleFavorite();$event.preventDefault()">
+              <i [ngClass]="[article.favorited ? 'fas fa-heart' : 'far fa-heart']"></i>
+              <span class="badge badge-light">{{article.favoritesCount}}</span>
+              <!-- <i matBadge="{{article.favoritesCount}}" matBadgePosition="before" matBadgeColor="accent"></i> -->
+            </button>
+
+
+
+            <!-- <button mat-fab shareButton="facebook" [style.backgroundColor]="share.prop.facebook.color">
+                <fa-icon [icon]="share.prop.facebook.icon" size="lg"></fa-icon>
+              </button>
+              <button mat-fab shareButton="twitter" [style.backgroundColor]="share.prop.twitter.color">
+                <fa-icon [icon]="share.prop.twitter.icon" size="lg"></fa-icon>
+              </button>
+              <button mat-fab shareButton="linkedin" [style.backgroundColor]="share.prop.linkedin.color">
+                <fa-icon [icon]="share.prop.linkedin.icon" size="lg"></fa-icon>
+              </button>
+              <button mat-fab shareButton="whatsapp" [style.backgroundColor]="share.prop.whatsapp.color">
+                <fa-icon [icon]="share.prop.whatsapp.icon" size="lg"></fa-icon>
+              </button>
+              <button mat-fab shareButton="telegram" [style.backgroundColor]="share.prop.telegram.color">
+                <fa-icon [icon]="share.prop.telegram.icon" size="lg"></fa-icon>
+              </button>
+              <button mat-fab shareButton="pinterest" [style.backgroundColor]="share.prop.pinterest.color">
+                <fa-icon [icon]="share.prop.pinterest.icon" size="lg"></fa-icon>
+              </button> -->
+
+            <mat-chip-list>
+                <mat-chip *ngFor="let tag of article.tagList"> {{ tag }}</mat-chip>
+            </mat-chip-list>
+
+        </mat-card-actions>
+    </mat-card>
+
+</div>

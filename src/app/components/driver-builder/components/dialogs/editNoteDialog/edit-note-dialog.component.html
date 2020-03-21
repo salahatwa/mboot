@@ -1,0 +1,26 @@
+<form [formGroup]="form" (ngSubmit)="submit(form)">
+    <h1 mat-dialog-title>
+        {{data.dialogTitle}} {{ data.note.title }}</h1>
+    <mat-dialog-content>
+
+        <mat-form-field class="example-chip-list">
+            <input matInput formControlName="extension" placeholder="File Extension">
+        </mat-form-field>
+
+        <mat-form-field class="example-chip-list">
+            <input matInput formControlName="alias" placeholder="Alias">
+        </mat-form-field>
+
+        <mat-checkbox formControlName="isRepeatable" [checked]="data.note.isRepeatable">Is Repeate</mat-checkbox>
+
+        <mat-form-field class="example-chip-list">
+            <input matInput formControlName="iterateKey" placeholder="Iterate Key">
+        </mat-form-field>
+
+
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button mat-raised-button type="submit">Update</button>
+        <button mat-raised-button color="primary" [mat-dialog-close]="false">Cancel</button>
+    </mat-dialog-actions>
+</form>

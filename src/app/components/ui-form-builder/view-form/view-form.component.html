@@ -1,0 +1,69 @@
+<!-- <div class="col-md-12 col-md-offset-4">
+    <dynamic-form [fields]="model" #form="dynamicForm" (submit)="submit($event)">
+    
+    </dynamic-form>
+</div> -->
+
+
+<mat-horizontal-stepper [linear]="isLinear" #stepper>
+
+    <ng-template matStepperIcon="create" let-index="index">
+        {{(index+1)}}
+    </ng-template>
+
+    <ng-template matStepperIcon="edit" let-index="index">
+        {{(index+1)}}
+    </ng-template>
+
+    <ng-template matStepperIcon="done" let-index="index">
+        {{(index+1)}}
+    </ng-template>
+
+    <ng-template matStepperIcon="number" let-index="index">
+        {{index+1}}
+    </ng-template>
+    <!-- [completed]="step.isCompleted" -->
+    <mat-step [completed]="step.isCompleted" *ngFor="let step of model.content; let index = index; let last = last;">
+
+
+
+        <ng-template matStepLabel>{{step.title}}</ng-template>
+
+        <div style="padding-bottom: 15px;">
+            <dynamic-form [fields]="step.attributes" [data]="data" #form="dynamicForm" (submit)="submit($event)">
+
+            </dynamic-form>
+        </div>
+        <!-- <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+        </div> -->
+
+        <div class="row">
+            <button class="col-md-1" *ngIf="index !== 0" matStepperPrevious mat-raised-button type="button" (click)="prevStep(index)">Back</button>
+            <span style="padding-right: 5px;" *ngIf="index !== 0"></span>
+            <button class="col-md-1" *ngIf="!last" (click)="nextStep(index,form)" matStepperNext mat-raised-button type="button" [disabled]="!form.valid">Next</button>
+            <!-- <button *ngIf="last" class="btn btn-primary" [disabled]="!dynamicForm.valid" type="submit">Submit</button> -->
+        </div>
+
+    </mat-step>
+
+    <!-- <mat-step>
+        <form [formGroup]="dynamicForm">
+            <ng-template matStepLabel>Fill out your address</ng-template>
+           
+            <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button matStepperNext>Next</button>
+            </div>
+        </form>
+    </mat-step> -->
+    <!-- <mat-step>
+        <ng-template matStepLabel>Done</ng-template>
+        <p>You are now done.</p>
+        <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button (click)="stepper.reset()">Reset</button>
+        </div>
+    </mat-step> -->
+</mat-horizontal-stepper>

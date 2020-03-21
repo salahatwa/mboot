@@ -1,0 +1,86 @@
+<div class="notes">
+
+    <!-- Initiate the recursive template rendering. -->
+    <div *ngIf="isNoteOpen">
+        <ng-container [ngTemplateOutlet]="noteTemplateRef" [ngTemplateOutletContext]="{ notes: notes }">
+        </ng-container>
+    </div>
+
+
+
+
+    <div *ngIf="!isNoteOpen&&selectedNote?.noteType=='0'||!isNoteOpen&&selectedNote?.noteType=='3'">
+        <note-content [application]="_activeApplication" [note]="selectedNote" (backBtn)="onBack()"></note-content>
+    </div>
+
+</div>
+
+
+
+<!-- Define the recursive template. -->
+<ng-template #noteTemplateRef let-notes="notes">
+
+
+    <mat-list-item *ngIf="notes.length==0">
+        <div class="note-item no-select px-2">
+            <div class="note-item-icon">
+                <i class="icon fab fa-cloudversify" style="color:whitesmoke"></i>
+            </div>
+            <div class="note-item-info px-1">
+                <div class="note-item-info-title">
+                    <span>Nothing</span>
+                </div>
+                <div class="note-item-info-date-and-tasks">
+                    <span>Add Template</span>
+                    <span class="ml-2">
+                            Click on below buttons to add new Template
+                        </span>
+                </div>
+            </div>
+        </div>
+    </mat-list-item>
+
+    <cdk-virtual-scroll-viewport itemSize="notes.length">
+        <mat-grid-list [responsive]="true" rowHeight="60" gutterSize="6px">
+            <mat-grid-tile *cdkVirtualFor="let note of notes">
+                <a [class.selected]="note === selectedNote" class="grid-list-item mat-body mat-elevation-z2" mat-ripple matTooltip="{{ 'Tooltips.LastChanged' | translate }}: {{note.displayExactModificationDate}}">
+                    <i *ngIf="note.noteType=='0'" class="icon far fa-file"></i>
+                    <i *ngIf="note.noteType=='1'" class="icon far fa-folder-open"></i>
+                    <i *ngIf="note.noteType=='3'" class="icon fas fa-newspaper"></i>
+                    <span class="flex-remain">{{note.title}}</span>
+                    <button mat-icon-button [matMenuTriggerFor]="menu" (click)="$event.preventDefault()">
+                        <i class="fas fa-ellipsis-v"></i>
+                    </button>
+                    <mat-menu #menu="matMenu" xPosition="before" overlapTrigger="false">
+                        <button mat-menu-item (click)="openNote(note);">
+                    <i class="icon far fa-folder-open"></i>
+                    <span>Open</span>
+                  </button>
+                        <button *ngIf="note.noteType=='0'" mat-menu-item (click)="editNote(note);">
+                    <i class="icon far fa-paper-plane"></i>
+                    <span>Edit</span>
+                  </button>
+
+                        <button *ngIf="note.noteType=='1'" mat-menu-item (click)="editFolder(note);">
+                    <i class="icon far fa-paper-plane"></i>
+                    <span>Edit</span>
+                  </button>
+
+                        <button *ngIf="note.noteType=='3'" mat-menu-item (click)="publish(note);">
+                    <i class="icon far fa-paper-plane"></i>
+                    <span>Publish</span>
+                  </button>
+                        <button mat-menu-item (click)="deleteNote(note);">
+                    <i class="icon far fa-trash-alt"></i>
+                    <span>Delete</span>
+                  </button>
+                    </mat-menu>
+                </a>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </cdk-virtual-scroll-viewport>
+
+
+
+
+</ng-template>
