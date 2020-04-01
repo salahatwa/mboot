@@ -62,94 +62,124 @@
 
 
 <div class="container-fluid gedf-wrapper page">
-    <mat-tab-group>
 
-        <mat-tab label="Your info">
-            <!--Font size -->
-            <div class="m-3">
-                <h1>Profile Picture</h1>
-                <app-profile-picture [(url)]="user.profile.image" [editmode]="editEnabled"></app-profile-picture>
-            </div>
-            <hr>
-            <!-- Closing -->
-            <div class="m-3">
-                <form [formGroup]="settingsForm" (ngSubmit)="submitForm()">
-                    <h1 class="mt-2">Details</h1>
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
 
-                    <mat-form-field class="example-full-width">
-                        <mat-label>Short bio about you</mat-label>
-                        <textarea matInput placeholder="Short bio about you" formControlName="bio"></textarea>
-                    </mat-form-field>
-                </form>
-            </div>
-            <hr>
+            <mat-tab-group>
 
-            <div class="m-3">
-                <form [formGroup]="settingsForm" (ngSubmit)="submitForm()">
-                    <h1 class="mt-2">Update Password</h1>
-
-                    <mat-form-field appearance="outline" class="col-md-3">
-                        <mat-label>Enter old password</mat-label>
-                        <input formControlName="oldPassword" matInput [type]="hideOld ? 'password' : 'text'">
-                        <button mat-icon-button matSuffix (click)="hideOld = !hideOld;$event.preventDefault()" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideOld">
-                            <mat-icon><i [ngClass]="hideOld ? 'fas fa-eye-slash' : 'fas fa-eye'"></i></mat-icon>
-                            </button>
-                    </mat-form-field>
-
-                    <mat-form-field appearance="outline" class="col-md-3">
-                        <mat-label>Enter new password</mat-label>
-                        <input formControlName="newPassword" matInput [type]="hideNew ? 'password' : 'text'">
-                        <button mat-icon-button matSuffix (click)="hideNew = !hideNew;$event.preventDefault()" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideNew">
-                            <mat-icon><i [ngClass]="hideNew ? 'fas fa-eye-slash' : 'fas fa-eye'"></i></mat-icon>
-                            </button>
-                    </mat-form-field>
-
-                    <mat-form-field appearance="outline" class="col-md-3">
-                        <mat-label>Confirm new password</mat-label>
-                        <input formControlName="confirmPassword" matInput [type]="hideNew ? 'password' : 'text'">
-                        <button mat-icon-button matSuffix (click)="hideNew = !hideNew;$event.preventDefault()" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideNew">
-                            <mat-icon><i [ngClass]="hideNew ? 'fas fa-eye-slash' : 'fas fa-eye'"></i></mat-icon>
-                            </button>
-                    </mat-form-field>
-
-                    <button class="col-md-1" mat-raised-button color="primary" [class.spinner]="isSubmitting" [disabled]="!settingsForm.valid||isSubmitting" type="submit">
-                        Update
-                    </button>
-
-
-                </form>
-            </div>
-        </mat-tab>
-
-        <mat-tab label="{{ 'SettingsTabs.Appearance' | translate }}">
-            <!-- Theme -->
-            <div class="m-3">
-                <h1>{{ 'SettingsPage.Theme' | translate }}</h1>
-                <div class="theme-switcher">
-                    <div *ngFor="let theme of themes">
-                        <div class="theme-switcher-button mr-1 mb-1">
-                            <div class="theme-switcher-button-selector" *ngIf="theme.name === selectedTheme">
-                                <i class="fas fa-check"></i>
+                <mat-tab label="Your info">
+                    <!--Font size -->
+                    <div class="m-3">
+                        <h1>Profile Picture</h1>
+                        <app-profile-picture [(url)]="user.profile.image" [editmode]="editEnabled"></app-profile-picture>
+                    </div>
+                    <hr>
+                    <!-- Closing -->
+               <div class="m-3">
+                   <h1>User details</h1>
+                   <form [formGroup]="infoForm" (ngSubmit)="submitInfoForm()">
+                   <mat-form-field class="example-full-width"  class="col-md-3">
+                    <mat-label>Short bio about you</mat-label>
+                    <textarea matInput placeholder="Short bio about you" formControlName="bio"></textarea>
+                </mat-form-field>
+        
+                <mat-form-field class="example-full-width"  class="col-md-3">
+                    <mat-label>Username</mat-label>
+                    <input matInput placeholder="please fill displayed name" type="text" formControlName="username"/>
+                </mat-form-field>
+        
+                <mat-form-field class="example-full-width"  class="col-md-3">
+                    <mat-label>Email</mat-label>
+                    <input matInput placeholder="Email"  type="email" formControlName="email"/>
+                </mat-form-field>
+                <button class="col-md-1" mat-raised-button color="primary" [class.spinner]="isInfoFormSubmitted" [disabled]="!infoForm.valid||isInfoFormSubmitted" type="submit">
+                    Update
+                </button>
+        
+        
+            </form>
+        
+               </div>
+                    <hr>
+        
+                    <div class="m-4">
+                        
+                        <form [formGroup]="credForm" (ngSubmit)="submitCredForm()">
+                            <h1 class="mt-2">Credentails</h1>
+        
+                            <div class="row">
+                                <app-list-errors [errors]="errors"></app-list-errors>
                             </div>
-                            <div class="theme-switcher-button-color" [ngStyle]="{'background-color': theme.color}" matTooltip="{{ theme.displayName }}" (click)="setTheme(theme.name)">
+                            
+        
+                            <mat-form-field appearance="outline" class="col-md-3">
+                                <mat-label>Enter old password</mat-label>
+                                <input formControlName="oldPassword" matInput [type]="hideOld ? 'password' : 'text'">
+                                <button mat-icon-button matSuffix (click)="hideOld = !hideOld;$event.preventDefault()" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideOld">
+                                    <mat-icon><i [ngClass]="hideOld ? 'fas fa-eye-slash' : 'fas fa-eye'"></i></mat-icon>
+                                    </button>
+                            </mat-form-field>
+        
+                            <mat-form-field appearance="outline" class="col-md-3">
+                                <mat-label>Enter new password</mat-label>
+                                <input formControlName="newPassword" matInput [type]="hideNew ? 'password' : 'text'">
+                                <button mat-icon-button matSuffix (click)="hideNew = !hideNew;$event.preventDefault()" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideNew">
+                                    <mat-icon><i [ngClass]="hideNew ? 'fas fa-eye-slash' : 'fas fa-eye'"></i></mat-icon>
+                                    </button>
+                            </mat-form-field>
+        
+                            <mat-form-field appearance="outline" class="col-md-3">
+                                <mat-label>Confirm new password</mat-label>
+                                <input formControlName="confirmPassword" matInput [type]="hideNew ? 'password' : 'text'">
+                                <button mat-icon-button matSuffix (click)="hideNew = !hideNew;$event.preventDefault()" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideNew">
+                                    <mat-icon><i [ngClass]="hideNew ? 'fas fa-eye-slash' : 'fas fa-eye'"></i></mat-icon>
+                                    </button>
+                            </mat-form-field>
+        
+                            <button class="col-md-1" mat-raised-button color="primary" [class.spinner]="isCredFormSubmitted" [disabled]="!credForm.valid||isCredFormSubmitted" type="submit">
+                                Update
+                            </button>
+        
+        
+                        </form>
+                    </div>
+                </mat-tab>
+        
+                <mat-tab label="{{ 'SettingsTabs.Appearance' | translate }}">
+                    <!-- Theme -->
+                    <div class="m-3">
+                        <h1>{{ 'SettingsPage.Theme' | translate }}</h1>
+                        <div class="theme-switcher">
+                            <div *ngFor="let theme of themes">
+                                <div class="theme-switcher-button mr-1 mb-1">
+                                    <div class="theme-switcher-button-selector" *ngIf="theme.name === selectedTheme">
+                                        <i class="fas fa-check"></i>
+                                    </div>
+                                    <div class="theme-switcher-button-color" [ngStyle]="{'background-color': theme.color}" matTooltip="{{ theme.displayName }}" (click)="setTheme(theme.name)">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <hr>
-            <!-- Language -->
-            <div class="m-3">
-                <h1 class="mt-2">{{ 'SettingsPage.Language' | translate }}</h1>
-                <mat-form-field>
-                    <mat-select [(ngModel)]="selectedLanguage">
-                        <mat-option *ngFor="let language of languages" [value]="language">
-                            {{ language.name }}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>
-        </mat-tab>
+                    <hr>
+                    <!-- Language -->
+                    <div class="m-3">
+                        <h1 class="mt-2">{{ 'SettingsPage.Language' | translate }}</h1>
+                        <mat-form-field>
+                            <mat-select [(ngModel)]="selectedLanguage">
+                                <mat-option *ngFor="let language of languages" [value]="language">
+                                    {{ language.name }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </mat-tab>
+        
+            </mat-tab-group>
 
-    </mat-tab-group>
+        </div>
+    </div>
+   
 </div>

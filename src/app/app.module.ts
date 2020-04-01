@@ -25,7 +25,8 @@ import { CoreModule } from './shared/shared-services/core';
 import { ClientModule } from './components/client/client.module';
 import { SharedPagesModule } from './shared/shared-pages/shared-pages.module';
 
-
+// import { NgProgressModule } from "ngx-progressbar";
+// import { NgProgressHttpModule } from "ngx-progressbar/http";
 
 
 
@@ -56,10 +57,12 @@ export function createTranslateLoader(http: HttpClient) {
       }
     }) ,
 
-   
-   
-    // InMemoryWebApiModule.forRoot(FakeBackendService,{dataEncapsulation: false, passThruUnknownUrl: true})
-  ],
+    // NgProgressModule.withConfig({
+    //   spinnerPosition: "left",
+    //   color: "#f71cff"
+    // }),
+    // NgProgressHttpModule
+ ],
   providers: [
     // AppServiceService,
   ],

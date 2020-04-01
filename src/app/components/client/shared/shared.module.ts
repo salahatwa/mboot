@@ -10,6 +10,8 @@ import { AuthModule } from './../../../shared/shared-services/auth/auth.module';
 import { MaterialModule } from './../../../shared/shared-module/material.module';
 import { AvatarModule } from 'ngx-avatar';
 import { InfiniteScrollModule } from './../../../shared/shared-components/infinite-scroll/infinite-scroll.module';
+import { ScrollTopModule } from './../../../shared/shared-components/scrolltotop/scroll-top.module';
+import { SanitizeHtmlPipe } from '../utils/sanitize-html.pipe';
 // import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 
@@ -23,14 +25,16 @@ import { InfiniteScrollModule } from './../../../shared/shared-components/infini
     AuthModule,
     MaterialModule,
     AvatarModule,
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    ScrollTopModule
   ],
   declarations: [
     ArticleListComponent,
     ArticleMetaComponent,
     ArticlePreviewComponent,
     FavoriteButtonComponent,
-    FollowButtonComponent
+    FollowButtonComponent,
+    SanitizeHtmlPipe
   ],
   exports: [
     ArticleListComponent,
@@ -45,7 +49,9 @@ import { InfiniteScrollModule } from './../../../shared/shared-components/infini
     RouterModule,
     AuthModule,
     MaterialModule,
-    AvatarModule
+    AvatarModule,
+    ScrollTopModule,
+    SanitizeHtmlPipe
     
   ]
 })

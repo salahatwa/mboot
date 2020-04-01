@@ -9,11 +9,19 @@
     </mat-sidenav>
     <mat-sidenav-content>
         <!--in here all the content must reside. We will add a navigation header as well-->
+
+        <!-- <ng-progress #progressBar ></ng-progress> -->
         <app-header (sidenavToggle)="sidenav.toggle()"></app-header>
         <app-progress-bar-loader></app-progress-bar-loader>
 
+        <div [hidden]="!loading" class="loader">
+            <h2>Loading...</h2>
+           
+          </div>
 
-        <router-outlet></router-outlet>
+        <div [hidden]="loading" class="router-output">
+      <router-outlet></router-outlet>
+    </div>
 
         <footer>
             <div class="footer" style="bottom: 0">

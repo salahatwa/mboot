@@ -1,11 +1,10 @@
 <div class="article-page">
-
     <div class="container page">
 
         <div class="row article-content">
             <div class="col-md-12">
 
-                <mat-card style="margin-bottom: 12px;">
+                <mat-card style="margin-bottom: 60px;">
                     <mat-card-header>
                         <div mat-card-avatar>
                             <a [routerLink]="['/profile', article.author.username]">
@@ -183,3 +182,7 @@
 
     </div>
 </div>
+
+
+<app-scroll-top [acceleration]="2" [animate]="true" [scrollDistance]="50" [speed]="50">
+</app-scroll-top>

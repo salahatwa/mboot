@@ -1,12 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { Router } from '@angular/router';
+import { Router, NavigationStart, NavigationEnd, NavigationCancel } from '@angular/router';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { AppearanceService } from './components/driver-builder/services/appearance.service';
 import { SettingsService } from './components/driver-builder/services/settings.service';
-//import { remote } from 'electron';
-import { Constants } from './components/driver-builder/utils/constants';
-import { Subscription, Subject, Observable } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { UserService } from './shared/shared-services/core';
 
 @Component({
@@ -14,7 +12,7 @@ import { UserService } from './shared/shared-services/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit , AfterViewInit{
   today: number = Date.now();
   
   private subscription: Subscription;
@@ -30,7 +28,21 @@ export class AppComponent implements OnInit{
     this.translateService.setDefaultLang(this.settingsService.defaultLanguage);
     this.translateService.use(this.settingsService.language);
   }
-  
+  loading:boolean;
+  ngAfterViewInit() {
+    this.router.events
+        .subscribe((event) => {
+            if(event instanceof NavigationStart) {
+                this.loading = true;
+            }
+            else if (
+                event instanceof NavigationEnd || 
+                event instanceof NavigationCancel
+                ) {
+                this.loading = false;
+            }
+        });
+}
   
   public selectedTheme: string;
 

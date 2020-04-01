@@ -22,6 +22,7 @@ import { MaterialModule } from './material.module';
 import { SharedPagesModule } from '../shared-pages/shared-pages.module';
 import { ListErrorsComponent } from '../shared-services/auth/error-component/list-errors.component';
 import { FileUploadModule } from 'ng2-file-upload';
+import { ScrollTopModule } from '../shared-components/scrolltotop/scroll-top.module';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { FileUploadModule } from 'ng2-file-upload';
     HttpClientModule,
     JoditAngularModule,
     ReactiveFormsModule,
+    ScrollTopModule
     
   ],
   exports:[
@@ -46,7 +48,7 @@ import { FileUploadModule } from 'ng2-file-upload';
     MaterialModule,
     HttpClientModule,
     JoditAngularModule,
-    ReactiveFormsModule],
+    ReactiveFormsModule,ScrollTopModule],
   providers: [
     SpinnerService,DynamicOverlay,DynamicOverlayContainer,
   ] ,

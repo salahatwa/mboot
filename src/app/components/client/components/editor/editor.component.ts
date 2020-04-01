@@ -7,6 +7,8 @@ import { ArticlesService } from '../../services';
 import { MatChipInputEvent } from '@angular/material';
 import { JoditAngularComponent } from './../../../../shared/shared-components/editor/jodit-angular.component';
 import { betweenLength } from '../../utils/validator';
+import { JwtService } from './../../../../shared/shared-services/core';
+import { environment } from './../../../../../environments/environment';
 
 
 @Component({
@@ -22,12 +24,13 @@ export class EditorComponent implements OnInit {
   //----------------EDITOR CONFIG---------------------
 
  editorConfig={
-  preset: "inline",
+  // preset: "inline",
   showPlaceholder:true,
   placeholder: "start typing text ...",
-  uploader: {
-    "insertImageAsBase64URI": true
-  },
+  // uploader: {
+  //   "insertImageAsBase64URI": true
+  // },
+  enableDragAndDropFileToEditor: true,
   sizeLG: 900,
   sizeMD: 700,
   sizeSM: 400,
@@ -54,7 +57,7 @@ export class EditorComponent implements OnInit {
       'copyformat', '|',
       'symbol',
       'fullsize',
-      // 'source'
+      'source'
   ],
   buttonsMD:[ 'bold',
   'strikethrough',
@@ -77,7 +80,7 @@ export class EditorComponent implements OnInit {
   'copyformat', '|',
   'symbol',
   'fullsize',
-  // 'source'
+  'source'
 ],
   buttonsSM:[ 'bold',
   'image', '|',
@@ -97,6 +100,59 @@ export class EditorComponent implements OnInit {
       'eraser',
       'dots'
   ],
+
+  uploader: {
+    url:  `${environment.api_url}`+'/storage/upload/multiple',
+    // url: 'https://mz-backend.herokuapp.com/builder/api/storage/local/uploadMultipleFiles',
+    // url: 'https://xdsoft.net/jodit/connector/index.php?action=fileUpload',
+    // format: 'json',
+    filesVariableName: function(e){return "files"},
+
+    insertImageAsBase64URI: false,
+    imagesExtensions: [
+        "jpg",
+        "png",
+        "jpeg",
+        "gif"
+      ],
+    withCredentials: true,
+    headers: {
+       "Authorization": 'Bearer ' + this.jwtService.getToken()
+    },
+
+    prepareData: function (data) {
+        data.append('id', 24);
+        return data;
+    },
+    isSuccess: function (resp) {
+        return resp;
+    },
+   
+
+    // getMsg: function (resp) {
+    //     return resp.msg.join !== undefined ? resp.msg.join(' ') : resp.msg;
+    // },
+  
+    // error: function (e) {
+    //     console.log(e);
+    //     // this.events.fire('errorPopap', [e.getMessage(), 'error', 4000]);
+    // },
+   // defaultHandlerSuccess: function (data, resp) {
+     //   console.log('2>>>'+JSON.stringify(data)+"@@@@:"+JSON.stringify(resp));
+       // this.joditEditor.editor.setMode(2);
+               //  this.joditEditor.addElement(data.baseurl);
+           
+     //},
+    // defaultHandlerError: function (resp) {
+    //     this.events.fire('errorPopap', [this.editorConfig.uploader.getMsg(resp)]);
+    // }
+},
+//  filebrowser: {
+ //    ajax: {
+   //      url: 'https://mz-backend.herokuapp.com/builder/api/storage/upload/multiple'
+     //}
+ //}
+
 }
  
 
@@ -115,7 +171,8 @@ export class EditorComponent implements OnInit {
     private articlesService: ArticlesService,
     private route: ActivatedRoute,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    protected jwtService: JwtService
   ) {
 
 
@@ -124,7 +181,7 @@ export class EditorComponent implements OnInit {
     // use the FormBuilder to create a form group
     this.articleForm = this.fb.group({
       title: ['', Validators.compose([Validators.required,  Validators.pattern('^(?=.{3,100}$)(?![-_.])(?!.*[-_.]{2})[a-zA-Z0-9-._ ]+(?![-_.])$')])],
-      description: ['', Validators.compose([Validators.required,  Validators.pattern('^(?=.{3,100}$)(?![-_.])(?!.*[-_.]{2})[a-zA-Z0-9-._ ]+(?![-_.])$')])],
+      description: ['', Validators.compose([Validators.required])],
       body: ['', Validators.required],
       tagList: this.fb.array([],Validators.compose([betweenLength(0,4)])) ,
     

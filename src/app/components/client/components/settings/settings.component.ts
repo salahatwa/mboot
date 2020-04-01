@@ -24,9 +24,13 @@ export class SettingsComponent implements OnInit {
 
   
   user: User = {} as User;
-  settingsForm: FormGroup;
+  
   errors: [];
-  isSubmitting = false;
+  credForm: FormGroup;
+  infoForm: FormGroup;
+
+  isCredFormSubmitted = false;
+  isInfoFormSubmitted = false;
 
   constructor(
     private router: Router,
@@ -41,11 +45,9 @@ export class SettingsComponent implements OnInit {
     Object.assign(this.user, this.userService.getCurrentUser());
 
     console.log(this.user);
-    this.settingsForm = this.fb.group({
-      image: this.user.profile.image,
-      username: this.user.profile.username,
-      bio: this.user.profile.bio,
-      email: this.user.profile.image,
+    this.credForm = this.fb.group({
+      // image: this.user.profile.image,
+     
       oldPassword: this.user.profile.oldpass,
       newPassword: [this.user.profile.newpass, Validators.required] ,
       confirmPassword: [this.user.profile.confirmpass, Validators.required]
@@ -53,6 +55,17 @@ export class SettingsComponent implements OnInit {
     ,
     { validator: matchingPasswords('newPassword', 'confirmPassword')}
     );
+
+    this.infoForm = this.fb.group({
+      // image: this.user.profile.image,
+     
+      username: this.user.profile.username,
+      bio: this.user.profile.bio,
+      email: this.user.profile.email,
+    }
+    );
+
+    
     // Optional: subscribe to changes on the form
     // this.settingsForm.valueChanges.subscribe(values => this.updateUser(values));
   }
@@ -73,20 +86,39 @@ export class SettingsComponent implements OnInit {
     this.router.navigateByUrl('/');
   }
 
-  submitForm() {
-    this.isSubmitting = true;
+  submitCredForm() {
+    this.isCredFormSubmitted = true;
 
     // update the model
-    this.updateUser(this.settingsForm.value);
+    // this.updateUser(this.credForm.value);
 
     this.userService
-    .update(this.settingsForm.value)
+    .update('/user/update/cred',this.credForm.value)
     .subscribe(
       updatedUser => this.router.navigateByUrl('/profile/' + updatedUser.profile.username),
       err => {
         this.errors = err.errors;
         console.log(err);
-        this.isSubmitting = false;
+        this.isCredFormSubmitted = false;
+      }
+    );
+  }
+
+
+  submitInfoForm() {
+    this.isInfoFormSubmitted = true;
+
+    // update the model
+    this.updateUser(this.infoForm.value);
+
+    this.userService
+    .update('/user/update/info',this.infoForm.value)
+    .subscribe(
+      updatedUser => this.router.navigateByUrl('/profile/' + updatedUser.profile.username),
+      err => {
+        this.errors = err.errors;
+        console.log(err);
+        this.isInfoFormSubmitted = false;
       }
     );
   }

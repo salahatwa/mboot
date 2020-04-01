@@ -1,74 +1,80 @@
 <div class="container-fluid gedf-wrapper page">
 
-
-    <mat-form-field>
-        <mat-label>Filter</mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia">
-    </mat-form-field>
-
-    <div class="mat-elevation-z8">
-        <table mat-table [dataSource]="page.content" *ngIf="page.totalElements > 0">
-
-            <ng-container matColumnDef="No">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> No </th>
-                <td mat-cell *matCellDef="let row;let i = index"> {{i + 1}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="slug">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Submitted Article </th>
-                <td mat-cell *matCellDef="let row">
-                    <a [routerLink]="['/article', row.slug ]" [state]="row.model" class="preview-link">
-                        <span>{{row.slug }}</span>
-                    </a>
-                </td>
-
-
-            </ng-container>
-
-            <ng-container matColumnDef="submittedNoteName">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Submitted Form </th>
-                <td mat-cell *matCellDef="let row"> {{row.submittedNoteName }} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="createAt">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Submitted At </th>
-                <td mat-cell *matCellDef="let row"> {{row.createAt | date:'medium' }} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="userName">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Sumbitted By </th>
-                <td mat-cell *matCellDef="let row">
-                    <a class="author" [routerLink]="['/profile', row.userName]">
-                        {{row.userName}} 
-                    </a>
-                </td>
-            </ng-container>
-
-            <ng-container matColumnDef="action">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
-                <td mat-cell *matCellDef="let row">
-                    {{row.canUpdate}}
-                    <a [routerLink]="['/article', article]" class="preview-link">
-                        <span>Read more...</span>
-                    </a>
-                </td>
-            </ng-container>
-
-
-
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;">
-            </tr>
-        </table>
-
-        <div *ngIf="page.totalElements === 0">No records found</div>
-
-
-        <div *ngIf="page.totalElements > 0">
-            <app-custom-pagination [page]="page" (nextPageEvent)="getNextPage()" (previousPageEvent)="getPreviousPage()" (pageSizeEvent)="getPageInNewSize($event)">
-            </app-custom-pagination>
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <mat-form-field>
+                <mat-label>Filter</mat-label>
+                <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia">
+            </mat-form-field>
+        
+            <div class="mat-elevation-z8">
+                <table mat-table [dataSource]="page.content" *ngIf="page.totalElements > 0">
+        
+                    <ng-container matColumnDef="No">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> No </th>
+                        <td mat-cell *matCellDef="let row;let i = index"> {{i + 1}} </td>
+                    </ng-container>
+        
+                    <ng-container matColumnDef="slug">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Submitted Article </th>
+                        <td mat-cell *matCellDef="let row">
+                            <a [routerLink]="['/article', row.slug ]" [state]="row.model" class="preview-link">
+                                <span>{{row.slug }}</span>
+                            </a>
+                        </td>
+        
+        
+                    </ng-container>
+        
+                    <ng-container matColumnDef="submittedNoteName">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Submitted Form </th>
+                        <td mat-cell *matCellDef="let row"> {{row.submittedNoteName }} </td>
+                    </ng-container>
+        
+                    <ng-container matColumnDef="createAt">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Submitted At </th>
+                        <td mat-cell *matCellDef="let row"> {{row.createAt | date:'medium' }} </td>
+                    </ng-container>
+        
+                    <ng-container matColumnDef="userName">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Sumbitted By </th>
+                        <td mat-cell *matCellDef="let row">
+                            <a class="author" [routerLink]="['/profile', row.userName]">
+                                {{row.userName}} 
+                            </a>
+                        </td>
+                    </ng-container>
+        
+                    <ng-container matColumnDef="action">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+                        <td mat-cell *matCellDef="let row">
+                            {{row.canUpdate}}
+                            <a [routerLink]="['/article', article]" class="preview-link">
+                                <span>Read more...</span>
+                            </a>
+                        </td>
+                    </ng-container>
+        
+        
+        
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+                    </tr>
+                </table>
+        
+                <div *ngIf="page.totalElements === 0">No records found</div>
+        
+        
+                <div *ngIf="page.totalElements > 0">
+                    <app-custom-pagination [page]="page" (nextPageEvent)="getNextPage()" (previousPageEvent)="getPreviousPage()" (pageSizeEvent)="getPageInNewSize($event)">
+                    </app-custom-pagination>
+                </div>
+            </div>
         </div>
     </div>
+    
+   
 
 
 </div>

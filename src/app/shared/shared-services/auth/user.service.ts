@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, ɵConsole } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable ,  BehaviorSubject ,  ReplaySubject } from 'rxjs';
 
@@ -63,8 +63,6 @@ export class UserService {
   attemptAuth(type, credentials): Observable<User> {
     const route = (type === 'login') ? '/signin' : '/signup';
 
-    console.log(JSON.stringify(credentials));
-
     return this.apiService.post('/auth' + route, credentials)
       .pipe(map(
       data => {
@@ -79,14 +77,18 @@ export class UserService {
   }
 
   // Update the user on the server (email, pass, etc)
-  update(user): Observable<User> {
+  update(path,user): Observable<User> {
+    console.log(user);
     return this.apiService
-    .put('/user/update',  user )
+    .put(path,  user )
     .pipe(map(data => {
       // Update the currentUser observable
       this.purgeAuth();
       this.setAuth(data);
       return data;
+    },
+    err=>{
+      console.log(err);
     }));
   }
 

@@ -43,9 +43,10 @@
         </mat-card-header>
 
         <mat-card-content>
-            <p>
-                {{ article.description }}
-            </p>
+            <div [innerHTML]="article.description | sanitizeHtml">
+                <!-- {{ article.description }} -->
+            </div>
+            <br/>
             <a [routerLink]="['/article', article.slug]" class="preview-link">
                 <span>Read more...</span>
             </a>

@@ -23,7 +23,8 @@ export class ProfilePictureComponent implements OnInit {
 
   constructor(protected jwtService: JwtService) {
     this.uploader = new FileUploader({
-      url: `${environment.api_url}`+'/storage/local/uploadFile',
+      // url: `${environment.api_url}`+'/storage/local/uploadFile',
+      url: `${environment.api_url}`+'/user/update/profilpic',
       disableMultipart: false,
       autoUpload: true,
       authToken: 'Bearer ' + this.jwtService.getToken()
@@ -31,8 +32,8 @@ export class ProfilePictureComponent implements OnInit {
 
     this.uploader.response.subscribe(res => {
       // Upload returns a JSON with the image ID
-      console.log(JSON.parse(res));
-      this.url = JSON.parse(res).data.files[0] ;
+      console.log(res);
+      this.url = JSON.parse(res).profile.image;
       this.urlChange.emit(this.url);
     });
   }
