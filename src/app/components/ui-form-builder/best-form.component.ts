@@ -314,7 +314,7 @@ constructor(public fb: FormBuilder,public dialog: MatDialog,private apiService: 
   }
 
   appNotes=[];
-  loadTemplate(actionType:string,appId:number)
+  loadTemplate(actionType:string,appId:string)
   {
       //  console.log(actionType+"-------"+appId);
         if(actionType=='1')

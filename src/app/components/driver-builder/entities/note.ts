@@ -1,16 +1,16 @@
 import * as moment from 'moment';
 
 export class Note{
-    constructor(public title: string, public applicationId: number) {
+    constructor(public title: string, public applicationId: string) {
     }
 
-    public id: number ;
+    public id: string ;
     public isMarked: boolean = false;
     public creationDate: number = moment().valueOf();
     public modificationDate: number = moment().valueOf();
     public content: string = "";
     public noteType:NoteType=NoteType.FILE;
-    public parentNote:number;
+    public parentNote:string;
     public extension:string;
     public displayModificationDate: string;
     public displayExactModificationDate: string;

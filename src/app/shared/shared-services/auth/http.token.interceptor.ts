@@ -31,11 +31,11 @@ export class HttpTokenInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       catchError(
         (err, caught) => {
-          // if (err.status === 401){
+          if (err.status === 401){
             // console.log(err)
             this.handleAuthError();
           //   throw err;
-          // }
+          }
           throw err;
         }
       )

@@ -2,14 +2,14 @@
     <div class="container page">
 
         <div class="row article-content">
-            <div class="col-md-12">
+            <div class="col-md-9">
 
                 <mat-card style="margin-bottom: 60px;">
                     <mat-card-header>
                         <div mat-card-avatar>
                             <a [routerLink]="['/profile', article.author.username]">
                                 <div *ngIf="article.author.image!= null">
-                                    <img class="user-pic" [src]="article.author.image" />
+                                    <img class="user-pic" width="40" height="40" [src]="article.author.image" />
                                 </div>
 
                                 <div *ngIf="article.author.image== null">
@@ -114,6 +114,11 @@
 
 
             </div>
+
+            <div class="col-md-3">
+
+            </div>
+
         </div>
 
 
@@ -162,7 +167,7 @@
                             </div>
                             <div class="card-footer">
                                 <img [src]="currentUser.profile.image" class="comment-author-img" />
-                                <button class="btn btn-sm btn-primary" type="submit">
+                                <button class="btn btn-sm" mat-raised-button color="primary"  type="submit">
                  Post Comment
                 </button>
                             </div>

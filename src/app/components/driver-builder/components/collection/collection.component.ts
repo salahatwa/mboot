@@ -276,16 +276,13 @@ export class CollectionComponent implements OnInit, OnDestroy {
     if((activeNote.noteType==NoteType.FILE||activeNote.noteType==NoteType.FORM)&&activeNote.parentNote==null)
     {
       //activeNote.noteType==NoteType.FORM
-      console.log('11HIDE>>>');
       this.hideNoteButtons();
     }
     else{
-      console.log('44SHOW>>>');
       this.showNoteButtons();
       // this.isNoteOpen=!this.isNoteOpen;
     }
   }else{
-    console.log('55SHOW>>>');
     this.showNoteButtons();
     // this.isNoteOpen=false;
   }
@@ -336,7 +333,7 @@ export class CollectionComponent implements OnInit, OnDestroy {
     return index;
   }
 
-  private  getApplicationByType(collectionId:number,appType:AppType,app?:Application){
+  private  getApplicationByType(collectionId:string,appType:AppType,app?:Application){
       this.builderService.getApplicationByType(collectionId,appType).subscribe(data=>{
         this.applications=data;
         if(app)

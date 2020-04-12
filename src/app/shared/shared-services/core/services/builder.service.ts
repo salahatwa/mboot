@@ -118,7 +118,7 @@ export class BuilderService {
       
   }
 
-  public async addApplication(collectionId:number,appName: string,appType :AppType)  :   Promise<Application>  {
+  public async addApplication(collectionId:string,appName: string,appType :AppType)  :   Promise<Application>  {
       
       // // Check if a appName name was provided
       // if (!appName || !appType) {
@@ -209,20 +209,20 @@ export class BuilderService {
     return Operation.Success;
   }
 
-  public getNote(noteId: number): Observable<Note> { 
+  public getNote(noteId: string): Observable<Note> { 
     return this.apiService.get('/builder/note/'+noteId);
    }
  
 
 
-  public  getNotesAsync(appId: number, parentNote :Note): Observable<Note[]> {
+  public  getNotesAsync(appId: string, parentNote :Note): Observable<Note[]> {
 
       if (appId) {
        
 
 
         // if(parentNote&&parentNote.noteType == NoteType.FOLDER) {
-          let parentNoteId:number=0;
+          let parentNoteId:string=null;
           if(parentNote)
            parentNoteId=parentNote.id;
 
@@ -344,7 +344,7 @@ export class BuilderService {
     return m.format("MMMM D, YYYY");
   }
 
-  public async addNote(noteType: NoteType, applicationId: number,parentNote:Note): Promise<NoteOperationResult> {
+  public async addNote(noteType: NoteType, applicationId: string,parentNote:Note): Promise<NoteOperationResult> {
     let baseTitle: string;
     switch(noteType)
     {

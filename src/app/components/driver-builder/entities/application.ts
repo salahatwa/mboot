@@ -1,8 +1,8 @@
 export class Application{
-    constructor(public name: string,public collectionId:number,public appType:AppType) {
+    constructor(public name: string,public collectionId:string,public appType:AppType) {
     }
 
-    public id: number;
+    public id: string;
     public isDefault: boolean = false;
     public isSelected: boolean;
     public selectedModel?:string=null;

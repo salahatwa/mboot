@@ -117,7 +117,7 @@ export class NotesComponent implements OnInit, OnDestroy {
             if(note)
             {
                 console.log('Listen:' + note.title);
-                const perviousNoteId: number = note.parentNote;
+                const perviousNoteId: string = note.parentNote;
                if(perviousNoteId)
                {
                 this.builderService.getNote(perviousNoteId).subscribe(backNote=>{
@@ -173,7 +173,7 @@ export class NotesComponent implements OnInit, OnDestroy {
 
         if(this._activeParentNote)
             {
-                const perviousNoteId: number = this._activeParentNote.parentNote;
+                const perviousNoteId: string = this._activeParentNote.parentNote;
                if(perviousNoteId)
                {
                 this.builderService.getNote(perviousNoteId).subscribe(backNote=>{
