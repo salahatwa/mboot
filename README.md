@@ -54,8 +54,6 @@ Here's why:
 * You can build any form with drag & drop online builder to build any user form 
 * You can build online template and using freemaker (template engine) to take vuser values from builded form and generate rendered template
 * You can write any aritcles with your design to  :smile:
-* You can 
-
 
 ### Built With
 This application built with Angular8 for frontend and Spring boot for backend and java8  , database mysql
@@ -83,7 +81,7 @@ npm install npm@latest -g
 
 ### Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
+1. Install Nodejs
 2. Clone the repo
 ```sh
 git clone https://github.com/your_username_/Project-Name.git
@@ -92,9 +90,9 @@ git clone https://github.com/your_username_/Project-Name.git
 ```sh
 npm install
 ```
-4. Enter your API in `config.js`
+4. Install Angular cli
 ```JS
-const API_KEY = 'ENTER YOUR API';
+ng serve
 ```
 
 
