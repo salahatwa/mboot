@@ -10,8 +10,8 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+  <a href="https://salahatwa.github.io/mboot">
+    <img src="https://salahatwa.github.io/mboot/favicon.ico" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">Mboot</h3>
@@ -19,7 +19,7 @@
   <p align="center">
     Best online generator & Template rendering & blog system you can use , build any web intializer like springboot initializer web , dynamic your code
     <br />
-    <a href="https://mboot.herokuapp.com/"><strong>View Demo »</strong></a>
+    <a href="https://salahatwa.github.io/mboot/home"><strong>View Demo »</strong></a>
     <br />
   </p>
 </p>
