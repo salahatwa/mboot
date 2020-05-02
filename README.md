@@ -19,7 +19,7 @@
   <p align="center">
     Best online generator & Template rendering & blog system you can use , build any web intializer like springboot initializer web , dynamic your code
     <br />
-    <a href="http://mboot.herokuapp.com/favicon.ico/home"><strong>View Demo »</strong></a>
+    <a href="http://mboot.herokuapp.com/"><strong>View Demo »</strong></a>
     <br />
   </p>
 </p>
