@@ -11,7 +11,7 @@
 <br />
 <p align="center">
   <a href="http://mboot.herokuapp.com">
-    <img src="http://mboot.herokuapp.com/favicon.ico" alt="Logo" width="80" height="80">
+    <img src="https://i.imgur.com/isHjwKj.png" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">Mboot</h3>
